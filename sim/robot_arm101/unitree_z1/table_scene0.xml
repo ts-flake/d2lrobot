@@ -1,0 +1,43 @@
+<mujoco model="table_scene0">
+  <compiler angle="radian"/>
+
+  <option timestep="0.001" impratio="10" density="1.2" integrator="implicitfast" cone="elliptic">
+    <flag multiccd="enable"/>
+  </option>
+
+  <visual>
+    <global azimuth="120" elevation="-20"/>
+    <quality shadowsize="8192"/>
+    <headlight ambient="0.3 0.3 0.3" diffuse="0.5 0.5 0.5" specular="0 0 0"/>
+    <scale forcewidth="0.025" contactwidth="0.05" contactheight="0.025" com="0.2" jointwidth="0.05" actuatorwidth="0.1" framelength="0.5" framewidth="0.02" constraint="0.02"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+  </visual>
+
+  <statistic extent="1" center="0 0 0.1"/>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072"/>
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300"/>
+    <texture type="2d" name="wood_tex" file="assets/wood.png"/>
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+    <material name="wood" texture="wood_tex"/>
+  </asset>
+
+  <worldbody>
+    <geom name="floor" size="0 0 0.05" type="plane" material="groundplane"/>
+    <site name="robot" pos="0.1 0 0.21" rgba="0 0 1 1"/>
+    <light pos="0 0 2" dir="0 0 -1" directional="true"/>
+    <body name="table" pos="0.5 0 0.2">
+      <geom size="0.5 0.5 0.01" type="box" material="wood"/>
+      <camera name="table_cam" target="table" pos="-0.7 -0.7 0.2" mode="targetbody"/>
+    </body>
+    <body name="bin" pos="0.5 0 0.31">
+      <joint type="free" limited="false" actuatorfrclimited="false"/>
+      <geom size="0.02 0.03" type="cylinder" mass="0.05" rgba="0.210704 0.237627 0.0323554 1"/>
+    </body>
+    <body name="box" pos="0.6 0.1 0.31">
+      <joint type="free" limited="false" actuatorfrclimited="false"/>
+      <geom size="0.02 0.02 0.02" type="box" mass="0.05" rgba="0.148682 0.264276 0.468198 1"/>
+    </body>
+  </worldbody>
+</mujoco>

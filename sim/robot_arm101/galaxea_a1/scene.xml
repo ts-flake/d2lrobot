@@ -1,0 +1,4 @@
+<mujoco model='a1_scene'>
+  <include file="scene0.xml"/>
+  <include file="a1.xml"/>
+</mujoco>
