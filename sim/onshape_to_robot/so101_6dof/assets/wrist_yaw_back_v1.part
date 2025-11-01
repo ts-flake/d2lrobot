@@ -1,0 +1,13 @@
+{
+    "configuration": "default",
+    "documentId": "5c7655f7a10be258b255653e",
+    "documentMicroversion": "472f665ba63a0335a1f197ba",
+    "elementId": "d51e1ae38b1e823f3778f9b0",
+    "fullConfiguration": "default",
+    "id": "MDsA+ioWQvsTKi0Mw",
+    "isStandardContent": false,
+    "name": "Wrist_Yaw_Back_v1 <1>",
+    "partId": "JHD",
+    "suppressed": false,
+    "type": "Part"
+}
