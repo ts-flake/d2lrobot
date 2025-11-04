@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!-- Generated using onshape-to-robot -->
-<!-- Onshape https://cad.onshape.com/documents/5c7655f7a10be258b255653e/w/9b7cf7340f5f742e2d847e84/e/ac65895bd5528030d2605499 -->
+<!-- Onshape https://cad.onshape.com/documents/5c7655f7a10be258b255653e/w/9b7cf7340f5f742e2d847e84/e/d0e6c0d70a7d3ea6fa2b9230 -->
 <robot name="so101_6dof">
   <!-- Link base_so101_v2 -->
   <link name="base_so101_v2">
@@ -61,13 +61,13 @@
   <!-- Link rotation_pitch_so101_v1 -->
   <link name="rotation_pitch_so101_v1">
     <inertial>
-      <origin xyz="0.0305927 -0.000721028 -0.041399" rpy="0 0 0"/>
+      <origin xyz="0.0306 -0.000272928 -0.041399" rpy="0 0 0"/>
       <mass value="0.055"/>
-      <inertia ixx="1.42162e-05" ixy="-3.38577e-08" ixz="1.57964e-09" iyy="1.19051e-05" iyz="1.07728e-07" izz="7.68507e-06"/>
+      <inertia ixx="1.42167e-05" ixy="-1.61961e-12" ixz="1.81699e-12" iyy="1.19046e-05" iyz="1.0774e-07" izz="7.68507e-06"/>
     </inertial>
     <!-- Part motor_holder_so101_base_v1 -->
     <visual>
-      <origin xyz="0.0677957 -0.000792934 0.0158499" rpy="-1.58544 -1.5708 0"/>
+      <origin xyz="0.0678 0.0002 0.0158499" rpy="-1.5708 -1.5708 0"/>
       <geometry>
         <mesh filename="package://assets/motor_holder_so101_base_v1.stl"/>
       </geometry>
@@ -76,14 +76,14 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="0.0677957 -0.000792934 0.0158499" rpy="-1.58544 -1.5708 0"/>
+      <origin xyz="0.0678 0.0002 0.0158499" rpy="-1.5708 -1.5708 0"/>
       <geometry>
         <mesh filename="package://assets/motor_holder_so101_base_v1.stl"/>
       </geometry>
     </collision>
     <!-- Part rotation_pitch_so101_v1 -->
     <visual>
-      <origin xyz="-0.0119987 0.000175737 0.0464" rpy="-1.5708 -4.06287e-15 3.12695"/>
+      <origin xyz="-0.012 3.03468e-16 0.0464" rpy="-1.5708 8.3213e-15 3.14159"/>
       <geometry>
         <mesh filename="package://assets/rotation_pitch_so101_v1.stl"/>
       </geometry>
@@ -92,14 +92,14 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="-0.0119987 0.000175737 0.0464" rpy="-1.5708 -4.06287e-15 3.12695"/>
+      <origin xyz="-0.012 3.03468e-16 0.0464" rpy="-1.5708 8.3213e-15 3.14159"/>
       <geometry>
         <mesh filename="package://assets/rotation_pitch_so101_v1.stl"/>
       </geometry>
     </collision>
     <!-- Part sts3215_2 -->
     <visual>
-      <origin xyz="0.0305909 -0.000848086 -0.0417" rpy="-1.55615 1.5708 0"/>
+      <origin xyz="0.0306 -0.0004 -0.0417" rpy="-1.5708 1.5708 0"/>
       <geometry>
         <mesh filename="package://assets/sts3215.stl"/>
       </geometry>
@@ -108,7 +108,7 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="0.0305909 -0.000848086 -0.0417" rpy="-1.55615 1.5708 0"/>
+      <origin xyz="0.0306 -0.0004 -0.0417" rpy="-1.5708 1.5708 0"/>
       <geometry>
         <mesh filename="package://assets/sts3215.stl"/>
       </geometry>
@@ -117,13 +117,13 @@
   <!-- Link upper_arm_so101_v1 -->
   <link name="upper_arm_so101_v1">
     <inertial>
-      <origin xyz="0.11257 0.015199 0.0185729" rpy="0 0 0"/>
+      <origin xyz="0.11257 0.0152006 0.0185729" rpy="0 0 0"/>
       <mass value="0.055"/>
-      <inertia ixx="1.42167e-05" ixy="1.81699e-12" ixz="-1.61961e-12" iyy="7.68507e-06" iyz="1.0774e-07" izz="1.19046e-05"/>
+      <inertia ixx="1.42167e-05" ixy="9.39216e-11" ixz="-3.13889e-12" iyy="7.68507e-06" iyz="1.0774e-07" izz="1.19046e-05"/>
     </inertial>
     <!-- Part sts3215_3 -->
     <visual>
-      <origin xyz="0.11257 0.0155 0.0187" rpy="3.14159 -6.95294e-15 1.5708"/>
+      <origin xyz="0.11257 0.0155016 0.0187" rpy="3.14159 -9.24429e-16 1.57081"/>
       <geometry>
         <mesh filename="package://assets/sts3215.stl"/>
       </geometry>
@@ -132,14 +132,14 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="0.11257 0.0155 0.0187" rpy="3.14159 -6.95294e-15 1.5708"/>
+      <origin xyz="0.11257 0.0155016 0.0187" rpy="3.14159 -9.24429e-16 1.57081"/>
       <geometry>
         <mesh filename="package://assets/sts3215.stl"/>
       </geometry>
     </collision>
     <!-- Part upper_arm_so101_v1 -->
     <visual>
-      <origin xyz="0.065085 -0.012 0.0182" rpy="3.14159 2.57591e-14 -3.14159"/>
+      <origin xyz="0.0650852 -0.0119991 0.0182" rpy="3.14159 1.40208e-15 -3.14158"/>
       <geometry>
         <mesh filename="package://assets/upper_arm_so101_v1.stl"/>
       </geometry>
@@ -148,7 +148,7 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="0.065085 -0.012 0.0182" rpy="3.14159 2.57591e-14 -3.14159"/>
+      <origin xyz="0.0650852 -0.0119991 0.0182" rpy="3.14159 1.40208e-15 -3.14158"/>
       <geometry>
         <mesh filename="package://assets/upper_arm_so101_v1.stl"/>
       </geometry>
@@ -157,13 +157,13 @@
   <!-- Link under_arm_so101_v1 -->
   <link name="under_arm_so101_v1">
     <inertial>
-      <origin xyz="0.122099 -0.0052 0.0185729" rpy="0 0 0"/>
+      <origin xyz="0.122099 -0.00520208 0.0185729" rpy="0 0 0"/>
       <mass value="0.055"/>
-      <inertia ixx="7.68507e-06" ixy="-1.81699e-12" ixz="1.0774e-07" iyy="1.42167e-05" iyz="1.61961e-12" izz="1.19046e-05"/>
+      <inertia ixx="7.68507e-06" ixy="1.09406e-10" ixz="1.0774e-07" iyy="1.42167e-05" iyz="-2.15016e-13" izz="1.19046e-05"/>
     </inertial>
     <!-- Part under_arm_so101_v1 -->
     <visual>
-      <origin xyz="0.0648499 0.032 0.0182" rpy="-3.14159 -2.7713e-15 3.14159"/>
+      <origin xyz="0.0648505 0.0319989 0.0182" rpy="-3.14159 -2.33147e-15 3.14158"/>
       <geometry>
         <mesh filename="package://assets/under_arm_so101_v1.stl"/>
       </geometry>
@@ -172,14 +172,14 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="0.0648499 0.032 0.0182" rpy="-3.14159 -2.7713e-15 3.14159"/>
+      <origin xyz="0.0648505 0.0319989 0.0182" rpy="-3.14159 -2.33147e-15 3.14158"/>
       <geometry>
         <mesh filename="package://assets/under_arm_so101_v1.stl"/>
       </geometry>
     </collision>
     <!-- Part sts3215_4 -->
     <visual>
-      <origin xyz="0.1224 -0.0052 0.0187" rpy="3.14159 2.06863e-15 -6.1933e-17"/>
+      <origin xyz="0.1224 -0.00520208 0.0187" rpy="-3.14159 -9.15934e-15 -1.70283e-05"/>
       <geometry>
         <mesh filename="package://assets/sts3215.stl"/>
       </geometry>
@@ -188,14 +188,14 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="0.1224 -0.0052 0.0187" rpy="3.14159 2.06863e-15 -6.1933e-17"/>
+      <origin xyz="0.1224 -0.00520208 0.0187" rpy="-3.14159 -9.15934e-15 -1.70283e-05"/>
       <geometry>
         <mesh filename="package://assets/sts3215.stl"/>
       </geometry>
     </collision>
     <!-- Part motor_holder_so101_wrist_v1 -->
     <visual>
-      <origin xyz="0.0648499 0.032 0.018" rpy="-3.14159 2.13212e-15 3.14159"/>
+      <origin xyz="0.0648505 0.0319989 0.018" rpy="-3.14159 -2.1311e-15 3.14158"/>
       <geometry>
         <mesh filename="package://assets/motor_holder_so101_wrist_v1.stl"/>
       </geometry>
@@ -204,46 +204,46 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="0.0648499 0.032 0.018" rpy="-3.14159 2.13212e-15 3.14159"/>
+      <origin xyz="0.0648505 0.0319989 0.018" rpy="-3.14159 -2.1311e-15 3.14158"/>
       <geometry>
         <mesh filename="package://assets/motor_holder_so101_wrist_v1.stl"/>
       </geometry>
     </collision>
   </link>
-  <!-- Link wrist_yaw_back_v1 -->
-  <link name="wrist_yaw_back_v1">
+  <!-- Link wrist_yaw_back_v2 -->
+  <link name="wrist_yaw_back_v2">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <mass value="1e-09"/>
       <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
     </inertial>
-    <!-- Part wrist_yaw_back_v1 -->
+    <!-- Part wrist_yaw_back_v2 -->
     <visual>
-      <origin xyz="1.4988e-15 8.60423e-16 0.0183" rpy="-1.5708 8.14228e-16 3.14159"/>
+      <origin xyz="5.55112e-17 2.77556e-17 0.0183" rpy="-1.5708 -2.30745e-14 -3.14159"/>
       <geometry>
-        <mesh filename="package://assets/wrist_yaw_back_v1.stl"/>
+        <mesh filename="package://assets/wrist_yaw_back_v2.stl"/>
       </geometry>
-      <material name="wrist_yaw_back_v1_material">
+      <material name="wrist_yaw_back_v2_material">
         <color rgba="0.972549 0.529412 0.00392157 1"/>
       </material>
     </visual>
     <collision>
-      <origin xyz="1.4988e-15 8.60423e-16 0.0183" rpy="-1.5708 8.14228e-16 3.14159"/>
+      <origin xyz="5.55112e-17 2.77556e-17 0.0183" rpy="-1.5708 -2.30745e-14 -3.14159"/>
       <geometry>
-        <mesh filename="package://assets/wrist_yaw_back_v1.stl"/>
+        <mesh filename="package://assets/wrist_yaw_back_v2.stl"/>
       </geometry>
     </collision>
   </link>
-  <!-- Link wrist_yaw_front_v1 -->
-  <link name="wrist_yaw_front_v1">
+  <!-- Link wrist_yaw_front_v2 -->
+  <link name="wrist_yaw_front_v2">
     <inertial>
-      <origin xyz="-0.035614 1.93855e-09 -0.00546195" rpy="0 0 0"/>
+      <origin xyz="-0.027864 1.93855e-09 0.00308455" rpy="0 0 0"/>
       <mass value="0.11"/>
-      <inertia ixx="3.84984e-05" ixy="1.97382e-13" ixz="3.29011e-05" iyy="0.00010459" iyz="3.4366e-12" izz="7.68376e-05"/>
+      <inertia ixx="7.11848e-05" ixy="1.97382e-13" ixz="3.5885e-05" iyy="0.000104987" iyz="3.4366e-12" izz="4.45482e-05"/>
     </inertial>
     <!-- Part sts3215_5 -->
     <visual>
-      <origin xyz="-0.0125 2.71051e-19 -0.0187" rpy="3.15544e-30 -0 -1.62843e-18"/>
+      <origin xyz="-0.0125 1.73472e-18 -0.0187" rpy="0 9.86076e-32 1.16629e-18"/>
       <geometry>
         <mesh filename="package://assets/sts3215.stl"/>
       </geometry>
@@ -252,14 +252,14 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="-0.0125 2.71051e-19 -0.0187" rpy="3.15544e-30 -0 -1.62843e-18"/>
+      <origin xyz="-0.0125 1.73472e-18 -0.0187" rpy="0 9.86076e-32 1.16629e-18"/>
       <geometry>
         <mesh filename="package://assets/sts3215.stl"/>
       </geometry>
     </collision>
     <!-- Part sts3215_6 -->
     <visual>
-      <origin xyz="-0.0583 5.04154e-18 0.00795" rpy="-1.73726e-18 -1.5708 0"/>
+      <origin xyz="-0.0428 5.20417e-18 0.025043" rpy="2.87028e-16 -1.5708 0"/>
       <geometry>
         <mesh filename="package://assets/sts3215.stl"/>
       </geometry>
@@ -268,38 +268,38 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="-0.0583 5.04154e-18 0.00795" rpy="-1.73726e-18 -1.5708 0"/>
+      <origin xyz="-0.0428 5.20417e-18 0.025043" rpy="2.87028e-16 -1.5708 0"/>
       <geometry>
         <mesh filename="package://assets/sts3215.stl"/>
       </geometry>
     </collision>
-    <!-- Part wrist_yaw_front_v1 -->
+    <!-- Part wrist_yaw_front_v2 -->
     <visual>
-      <origin xyz="-0.0433 3.57787e-18 -0.0045" rpy="3.14159 -2.52435e-29 3.14159"/>
+      <origin xyz="-0.0283 -8.67362e-19 0.0037965" rpy="3.14159 1.28024e-16 3.14159"/>
       <geometry>
-        <mesh filename="package://assets/wrist_yaw_front_v1.stl"/>
+        <mesh filename="package://assets/wrist_yaw_front_v2.stl"/>
       </geometry>
-      <material name="wrist_yaw_front_v1_material">
+      <material name="wrist_yaw_front_v2_material">
         <color rgba="0.972549 0.529412 0.00392157 1"/>
       </material>
     </visual>
     <collision>
-      <origin xyz="-0.0433 3.57787e-18 -0.0045" rpy="3.14159 -2.52435e-29 3.14159"/>
+      <origin xyz="-0.0283 -8.67362e-19 0.0037965" rpy="3.14159 1.28024e-16 3.14159"/>
       <geometry>
-        <mesh filename="package://assets/wrist_yaw_front_v1.stl"/>
+        <mesh filename="package://assets/wrist_yaw_front_v2.stl"/>
       </geometry>
     </collision>
   </link>
   <!-- Link wrist_roll_follower_so101_v1 -->
   <link name="wrist_roll_follower_so101_v1">
     <inertial>
-      <origin xyz="-0.00739903 -2.7072e-05 -0.0234" rpy="0 0 0"/>
+      <origin xyz="-0.00739897 -3.8579e-05 -0.0234" rpy="0 0 0"/>
       <mass value="0.055"/>
-      <inertia ixx="7.68507e-06" ixy="-1.0774e-07" ixz="1.81699e-12" iyy="1.19046e-05" iyz="1.61961e-12" izz="1.42167e-05"/>
+      <inertia ixx="7.68542e-06" ixy="-1.14302e-07" ixz="1.81447e-12" iyy="1.19043e-05" iyz="1.62244e-12" izz="1.42167e-05"/>
     </inertial>
     <!-- Part wrist_roll_follower_so101_v1 -->
     <visual>
-      <origin xyz="-2.77556e-17 0.000218214 0.000949706" rpy="-3.14159 6.6491e-17 3.14159"/>
+      <origin xyz="-3.39371e-07 0.000218214 0.000949706" rpy="3.14159 -5.80033e-15 -3.14004"/>
       <geometry>
         <mesh filename="package://assets/wrist_roll_follower_so101_v1.stl"/>
       </geometry>
@@ -308,14 +308,14 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="-2.77556e-17 0.000218214 0.000949706" rpy="-3.14159 6.6491e-17 3.14159"/>
+      <origin xyz="-3.39371e-07 0.000218214 0.000949706" rpy="3.14159 -5.80033e-15 -3.14004"/>
       <geometry>
         <mesh filename="package://assets/wrist_roll_follower_so101_v1.stl"/>
       </geometry>
     </collision>
     <!-- Part sts3215_7 -->
     <visual>
-      <origin xyz="-0.0077 0.0001 -0.0234" rpy="-1.5708 -1.99193e-17 3.14159"/>
+      <origin xyz="-0.00770015 8.80247e-05 -0.0234" rpy="-1.5708 -5.80034e-15 -3.14004"/>
       <geometry>
         <mesh filename="package://assets/sts3215.stl"/>
       </geometry>
@@ -324,14 +324,14 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="-0.0077 0.0001 -0.0234" rpy="-1.5708 -1.99193e-17 3.14159"/>
+      <origin xyz="-0.00770015 8.80247e-05 -0.0234" rpy="-1.5708 -5.80034e-15 -3.14004"/>
       <geometry>
         <mesh filename="package://assets/sts3215.stl"/>
       </geometry>
     </collision>
     <!-- Part camera_mount_v30 -->
     <visual>
-      <origin xyz="0.015 -0.024 -0.0315502" rpy="-1.5708 1.68368e-16 1.5708"/>
+      <origin xyz="0.0150373 -0.0239766 -0.0315502" rpy="-1.5708 -3.42365e-14 1.57235"/>
       <geometry>
         <mesh filename="package://assets/camera_mount_v30.stl"/>
       </geometry>
@@ -340,7 +340,7 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="0.015 -0.024 -0.0315502" rpy="-1.5708 1.68368e-16 1.5708"/>
+      <origin xyz="0.0150373 -0.0239766 -0.0315502" rpy="-1.5708 -3.42365e-14 1.57235"/>
       <geometry>
         <mesh filename="package://assets/camera_mount_v30.stl"/>
       </geometry>
@@ -355,7 +355,7 @@
     </inertial>
     <!-- Part moving_jaw_so101_v1 -->
     <visual>
-      <origin xyz="0.000944164 0.000490603 0.0189" rpy="-6.54526e-15 1.05916e-14 8.08335e-15"/>
+      <origin xyz="0.000944164 0.000490603 0.0189" rpy="-4.61886e-16 1.01788e-15 2.16299e-16"/>
       <geometry>
         <mesh filename="package://assets/moving_jaw_so101_v1.stl"/>
       </geometry>
@@ -364,66 +364,66 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="0.000944164 0.000490603 0.0189" rpy="-6.54526e-15 1.05916e-14 8.08335e-15"/>
+      <origin xyz="0.000944164 0.000490603 0.0189" rpy="-4.61886e-16 1.01788e-15 2.16299e-16"/>
       <geometry>
         <mesh filename="package://assets/moving_jaw_so101_v1.stl"/>
       </geometry>
     </collision>
   </link>
   <!-- Joint from wrist_roll_follower_so101_v1 to moving_jaw_so101_v1 -->
-  <joint name="joint 7" type="revolute">
-    <origin xyz="-0.0202 -0.0186 -0.0234" rpy="1.5708 -1.99193e-17 3.14159"/>
+  <joint name="joint7" type="revolute">
+    <origin xyz="-0.020171 -0.0186314 -0.0234" rpy="1.5708 -5.80034e-15 -3.14004"/>
     <parent link="wrist_roll_follower_so101_v1"/>
     <child link="moving_jaw_so101_v1"/>
     <axis xyz="0 0 1"/>
     <limit effort="10" velocity="10" lower="-0.174533" upper="1.74533"/>
   </joint>
-  <!-- Joint from wrist_yaw_front_v1 to wrist_roll_follower_so101_v1 -->
-  <joint name="joint 6" type="revolute">
-    <origin xyz="-0.077 4.60786e-18 0.02045" rpy="3.14159 -1.5708 0"/>
-    <parent link="wrist_yaw_front_v1"/>
+  <!-- Joint from wrist_yaw_front_v2 to wrist_roll_follower_so101_v1 -->
+  <joint name="joint6" type="revolute">
+    <origin xyz="-0.0615 -8.67362e-19 0.037543" rpy="-3.14159 -1.5708 0"/>
+    <parent link="wrist_yaw_front_v2"/>
     <child link="wrist_roll_follower_so101_v1"/>
     <axis xyz="0 0 1"/>
-    <limit effort="10" velocity="10" lower="-2.74366" upper="2.8414"/>
+    <limit effort="10" velocity="10" lower="-2.96861" upper="2.86078"/>
   </joint>
-  <!-- Joint from wrist_yaw_back_v1 to wrist_yaw_front_v1 -->
-  <joint name="joint 5" type="revolute">
-    <origin xyz="0.0515 -0.01795 0.0183" rpy="1.5708 -2.52012e-14 3.14159"/>
-    <parent link="wrist_yaw_back_v1"/>
-    <child link="wrist_yaw_front_v1"/>
+  <!-- Joint from wrist_yaw_back_v2 to wrist_yaw_front_v2 -->
+  <joint name="joint5" type="revolute">
+    <origin xyz="0.0290001 -0.0358999 0.0183" rpy="1.5708 -0.0151526 -3.14159"/>
+    <parent link="wrist_yaw_back_v2"/>
+    <child link="wrist_yaw_front_v2"/>
     <axis xyz="0 0 1"/>
-    <limit effort="10" velocity="10" lower="-1.53589" upper="1.53589"/>
+    <limit effort="10" velocity="10" lower="-1.55104" upper="1.52074"/>
   </joint>
-  <!-- Joint from under_arm_so101_v1 to wrist_yaw_back_v1 -->
-  <joint name="joint 4" type="revolute">
-    <origin xyz="0.1349 -0.0052 -3.61516e-15" rpy="-2.54454e-15 2.06863e-15 -6.1933e-17"/>
+  <!-- Joint from under_arm_so101_v1 to wrist_yaw_back_v2 -->
+  <joint name="joint4" type="revolute">
+    <origin xyz="0.1349 -0.0052023 -4.57967e-16" rpy="2.15258e-14 -9.15934e-15 -1.70283e-05"/>
     <parent link="under_arm_so101_v1"/>
-    <child link="wrist_yaw_back_v1"/>
+    <child link="wrist_yaw_back_v2"/>
     <axis xyz="0 0 1"/>
     <limit effort="10" velocity="10" lower="-1.46608" upper="1.64061"/>
   </joint>
   <!-- Joint from upper_arm_so101_v1 to under_arm_so101_v1 -->
-  <joint name="joint 3" type="revolute">
-    <origin xyz="0.11257 0.028 3.43128e-15" rpy="-2.34236e-14 -6.95294e-15 1.5708"/>
+  <joint name="joint3" type="revolute">
+    <origin xyz="0.11257 0.0280016 1.97758e-16" rpy="-6.19838e-16 -9.24429e-16 1.57081"/>
     <parent link="upper_arm_so101_v1"/>
     <child link="under_arm_so101_v1"/>
     <axis xyz="0 0 1"/>
-    <limit effort="10" velocity="10" lower="-1.68948" upper="1.5708"/>
+    <limit effort="10" velocity="10" lower="-1.68946" upper="1.57081"/>
   </joint>
   <!-- Joint from rotation_pitch_so101_v1 to upper_arm_so101_v1 -->
-  <joint name="joint 2" type="revolute">
-    <origin xyz="0.0308647 0.0178499 -0.0542" rpy="1.58544 1.5708 0"/>
+  <joint name="joint2" type="revolute">
+    <origin xyz="0.0306 0.0183 -0.0542" rpy="1.5708 1.5708 0"/>
     <parent link="rotation_pitch_so101_v1"/>
     <child link="upper_arm_so101_v1"/>
     <axis xyz="0 0 1"/>
-    <limit effort="10" velocity="10" lower="-1.74533" upper="1.74533"/>
+    <limit effort="10" velocity="10" lower="-1.74534" upper="1.74532"/>
   </joint>
   <!-- Joint from base_so101_v2 to rotation_pitch_so101_v1 -->
-  <joint name="joint 1" type="revolute">
+  <joint name="joint1" type="revolute">
     <origin xyz="0.00025 -0.0449 0.0648" rpy="-3.14159 2.54451e-16 -1.5708"/>
     <parent link="base_so101_v2"/>
     <child link="rotation_pitch_so101_v1"/>
     <axis xyz="0 0 1"/>
-    <limit effort="10" velocity="10" lower="-1.90522" upper="1.93451"/>
+    <limit effort="10" velocity="10" lower="-1.91986" upper="1.91986"/>
   </joint>
 </robot>
