@@ -1,0 +1,14 @@
+{
+    "configuration": "default",
+    "documentId": "f907d264495cb751bf9c3c79",
+    "documentMicroversion": "05bbdab9df34727762c50474",
+    "documentVersion": "e74def42bb67b57e10046d33",
+    "elementId": "af12c70c4cf490fa0ec1fc1b",
+    "fullConfiguration": "default",
+    "id": "MlwBnnxMXgYGypCKd",
+    "isStandardContent": false,
+    "name": "camera_UVC_25x32 <1>",
+    "partId": "JsD",
+    "suppressed": false,
+    "type": "Part"
+}

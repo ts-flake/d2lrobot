@@ -1,0 +1,14 @@
+{
+    "configuration": "default",
+    "documentId": "62a6786f17b39d7261ed6971",
+    "documentMicroversion": "a98d67913e00dc1e08f32f14",
+    "documentVersion": "b07ea2f2b92c4f3821e98e0f",
+    "elementId": "7f39a38ef5d7528ab28d2402",
+    "fullConfiguration": "default",
+    "id": "MUDxu/fCoRYH6suON",
+    "isStandardContent": false,
+    "name": "camera_mount <1>",
+    "partId": "JFD",
+    "suppressed": false,
+    "type": "Part"
+}
