@@ -18,11 +18,11 @@ More examples are in progress...
 
 ### IK
 
-The `RRKinematics` class in `software/src/model/rr_kinematics.py` is essentially a refactoring of the `SO101Kinematics` from the XLeRobot, with a detailed comment on the angle definition and better namings.
+The `RRKinematics` class in `software/src/model/rr_kinematics.py` is essentially a refactoring of the `SO101Kinematics` from the XLeRobot, with a detailed comment on the angle definitions and better namings.
 
 ### XLeVR
 
-The `wrist_yaw_deg` is a newly added field to control the SO101_yaw (or any 6DoF) robot arm. The current code (`xlevr/inputs/vr_ws_server.py`) uses the absolute `target_position`. And the pose (xyz + wrist rotation angles) is expressed in the local frame (i.e., `origin_quaternion`), since this format is more convinent when the user relocate in space (see the controller keymap below).
+The `wrist_yaw_deg` is a newly added field to control the SO101-yaw (or any 6DoF) robot arm. The current code (`xlevr/inputs/vr_ws_server.py`) uses the absolute `target_position`. And the pose (xyz + wrist rotation angles) is expressed in the local frame (i.e., `origin_quaternion`), since this format is more convinent when the user relocate in space (see the controller keymap below).
 
 ### Controller Keymap: SO101_yaw
 
