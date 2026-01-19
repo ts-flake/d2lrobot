@@ -2,17 +2,13 @@
 
 This repo is based on the XLeRobot [[Link](https://github.com/Vector-Wangel/XLeRobot/tree/main)]. We provide the codes to teleoperate and record dataset using the bimanual SO101-yaw (6DoF) platform [[Link](https://makerworld.com/en/models/1913316-so101-arm-wrist-yaw-6dof#profileId-2088553)].
 
- 
-
 ## 2. Installation
 
-> Before you start:
+> [!note] Before you start:
 > 
 > - Have the physical platform (XLeRobot) ready
 > 
 > - Install the `lerobot`
-
-
 
 ### 2.1 Move files
 
@@ -28,8 +24,6 @@ software/
             - xlerobot_yaw/  --> move to lerobot/src/lerobot/robots
         - ...
 ```
-
-
 
 ### 2.2 Modifiy codes
 
@@ -53,8 +47,6 @@ You still need to update a few lines of codes.
       return XLeRobotYawVR(config)
   ```
 
-
-
 ## 3. Usages
 
 To teleoperate XLeRobot using a VR (Quest3), go to `lerobot/examples/xlerobot_yaw` and run:
@@ -72,8 +64,6 @@ The full list of parameters can be found in...
 
 - `.../teleoperators/xlerobot_yaw_vr/config_xlerobot_yaw_vr.py`
 
-
-
 ## 4. Changes
 
 ### 4.1 IK
@@ -83,8 +73,6 @@ The `RRKinematics` class in `software/src/model/rr_kinematics.py` is essentially
 ### 4.2 XLeVR
 
 The `wrist_yaw_deg` is a newly added field to `ControlGoal` for the SO101-yaw (or any 6DoF) robot arm.
-
-
 
 Significant changes to `XLeVR/xlevr/inputs/vr_ws_server.py`:
 
@@ -119,8 +107,6 @@ Significant changes to `XLeVR/xlevr/inputs/vr_ws_server.py`:
       }
   }
   ```
-  
-  
 
 ### 4.3 Controller Keymap: SO101_yaw
 
@@ -133,6 +119,8 @@ Below are the default keymaps used for SO101_yaw.
 - **grip (squeeze) button**: freeze / unfreeze left arm (set by `grip_to_activate` in `XLeRobotYawVRConfig`)
 - **X button**: quit and move back to initial position
 - **Y button**: move back to zero position
+
+
 
 **Right controller**
 
