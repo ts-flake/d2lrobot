@@ -4,7 +4,9 @@ This repo is based on the XLeRobot [[Link](https://github.com/Vector-Wangel/XLeR
 
 ## 2. Installation
 
-> [!note] Before you start:
+> [!NOTE]
+> 
+>  Before you start:
 > 
 > - Have the physical platform (XLeRobot) ready
 > 
