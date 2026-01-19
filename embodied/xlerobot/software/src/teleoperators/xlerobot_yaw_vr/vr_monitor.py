@@ -15,9 +15,12 @@ import ssl
 import socket
 from pathlib import Path
 from typing import Optional
+import time
 
 # Set the absolute path to the xlevr folder
 XLEVR_PATH = "/home/dhan/XLeRobot/XLeVR"
+
+logger = logging.getLogger(__name__)
 
 def setup_xlevr_environment():
     """Setup xlevr environment"""
@@ -54,8 +57,8 @@ def import_xlevr_modules():
         from xlevr.inputs.base import ControlGoal, ControlMode
         return XLeVRConfig, VRWebSocketServer, ControlGoal, ControlMode
     except ImportError as e:
-        print(f"Error importing xlevr modules: {e}")
-        print(f"Make sure XLEVR_PATH is correct: {XLEVR_PATH}")
+        logger.error(f"Error importing xlevr modules: {e}")
+        logger.error(f"Make sure XLEVR_PATH is correct: {XLEVR_PATH}")
         return None, None, None, None
 
 class SimpleAPIHandler(http.server.BaseHTTPRequestHandler):
@@ -118,7 +121,7 @@ class SimpleAPIHandler(http.server.BaseHTTPRequestHandler):
             else:
                 self.send_error(404, f"File not found: {filename}")
         except Exception as e:
-            print(f"Error serving file {filename}: {e}")
+            logger.error(f"Error serving file {filename}: {e}")
             self.send_error(500, "Internal server error")
 
 class SimpleHTTPSServer:
@@ -148,10 +151,10 @@ class SimpleHTTPSServer:
             self.server_thread = threading.Thread(target=self.httpd.serve_forever, daemon=True)
             self.server_thread.start()
             
-            print(f"🌐 HTTPS server started on {self.config.host_ip}:{self.config.https_port}")
+            logger.info(f"🌐 HTTPS server started on {self.config.host_ip}:{self.config.https_port}")
             
         except Exception as e:
-            print(f"❌ Failed to start HTTPS server: {e}")
+            logger.error(f"❌ Failed to start HTTPS server: {e}")
             raise
     
     async def stop(self):
@@ -160,7 +163,7 @@ class SimpleHTTPSServer:
             self.httpd.shutdown()
             if self.server_thread:
                 self.server_thread.join(timeout=5)
-            print("🌐 HTTPS server stopped")
+            logger.info("🌐 HTTPS server stopped")
 
 class VRMonitor:
     """VR control information monitor"""
@@ -175,10 +178,12 @@ class VRMonitor:
         self.right_goal = None
         self.headset_goal = None  # Add headset goal
         self._goal_lock = threading.Lock()  # Add thread lock
+        self.print_only = False  # Changed to False to send data to queue
+        self.debug = False
     
     def initialize(self):
         """Initialize VR monitor"""
-        print("🔧 Initializing XLeVR Monitor...")
+        logger.info("🔧 Initializing XLeVR Monitor...")
         
         # Setup environment
         setup_xlevr_environment()
@@ -186,7 +191,7 @@ class VRMonitor:
         # Import modules
         XLeVRConfig, VRWebSocketServer, ControlGoal, ControlMode = import_xlevr_modules()
         if XLeVRConfig is None:
-            print("❌ Failed to import xlevr modules")
+            logger.error("❌ Failed to import xlevr modules")
             return False
         
         # Create configuration
@@ -203,29 +208,30 @@ class VRMonitor:
             self.vr_server = VRWebSocketServer(
                 command_queue=self.command_queue,
                 config=self.config,
-                print_only=False  # Changed to False to send data to queue
+                print_only=self.print_only,
+                debug=self.debug
             )
         except Exception as e:
-            print(f"❌ Failed to create VR WebSocket server: {e}")
+            logger.error(f"❌ Failed to create VR WebSocket server: {e}")
             return False
         
         # Create HTTPS server
         try:
             self.https_server = SimpleHTTPSServer(self.config)
         except Exception as e:
-            print(f"❌ Failed to create HTTPS server: {e}")
+            logger.error(f"❌ Failed to create HTTPS server: {e}")
             return False
         
-        print("✅ XLeVR Monitor initialized successfully")
+        logger.info("✅ XLeVR Monitor initialized successfully")
         
         return True
     
     async def start_monitoring(self):
         """Start monitoring VR control information"""
-        print("🚀 Starting VR Monitor...")
+        logger.info("🚀 Starting VR Monitor...")
         
         if not self.initialize():
-            print("❌ Failed to initialize VR monitor")
+            logger.error("❌ Failed to initialize VR monitor")
             return
         
         try:
@@ -236,30 +242,34 @@ class VRMonitor:
             await self.vr_server.start()
             
             self.is_running = True
-            print("✅ VR Monitor is now running")
+            logger.info("✅ VR Monitor is now running")
             
             # Display connection information
             host_display = get_local_ip() if self.config.host_ip == "0.0.0.0" else self.config.host_ip
-            print(f"📱 Open your VR headset browser and navigate to:")
-            print(f"   https://{host_display}:{self.config.https_port}")
-            print("🎯 Press Ctrl+C to stop monitoring")
+            logger.info(f"📱 Open your VR headset browser and navigate to:")
+            logger.info(f"   https://{host_display}:{self.config.https_port}")
+            logger.info("🎯 Press Ctrl+C to stop monitoring")
             print()
+
+            # Calibrate VR monitor
+            self.calibrate()
             
             # Monitor command queue
             await self.monitor_commands()
-            
+
+
         except KeyboardInterrupt:
-            print("\n⏹️  Stopping VR monitor...")
+            logger.info("\n⏹️  Stopping VR monitor...")
         except Exception as e:
-            print(f"❌ Error in VR monitor: {e}")
+            logger.error(f"❌ Error in VR monitor: {e}")
             import traceback
-            print(f"Traceback: {traceback.format_exc()}")
+            logger.error(f"Traceback: {traceback.format_exc()}")
         finally:
             await self.stop_monitoring()
     
     async def monitor_commands(self):
         """Monitor commands from VR controllers"""
-        print("📊 Monitoring VR control commands...")
+        logger.info("📊 Monitoring VR control commands...")
         
         while self.is_running:
             try:
@@ -282,9 +292,9 @@ class VRMonitor:
                 # Timeout, continue loop
                 continue
             except Exception as e:
-                print(f"❌ Error processing command: {e}")
+                logger.error(f"❌ Error processing command: {e}")
                 import traceback
-                print(f"Traceback: {traceback.format_exc()}")
+                logger.error(f"Traceback: {traceback.format_exc()}")
     
     def print_control_goal(self, goal):
         """Print control goal information"""
@@ -352,6 +362,18 @@ class VRMonitor:
         """Return the latest right arm goal if available, else None."""
         return self.get_latest_goal_nowait("right")
     
+    @property
+    def is_calibrated(self) -> bool:
+        return self.vr_server is not None and self.vr_server.is_calibrated
+    
+    def calibrate(self):
+        if self.vr_server is None:
+            logger.error("❌ VR server not initialized")
+            return
+        logger.info("🔧 Calibrating VR monitor...\n    "
+                    "\033[4mPlease position the headset and controllers in the desired calibration pose and press 'B' on the right controller...\033[0m")
+        self.vr_server.calibrate()
+
     async def stop_monitoring(self):
         """Stop monitoring"""
         self.is_running = False
@@ -362,29 +384,29 @@ class VRMonitor:
         if self.https_server:
             await self.https_server.stop()
         
-        print("✅ VR Monitor stopped")
+        logger.info("✅ VR Monitor stopped")
 
 def main():
     """Main function"""
-    print("🎮 XLeVR Monitor - XLeVR VR Control Information Monitor")
+    logger.info("🎮 XLeVR Monitor - XLeVR VR Control Information Monitor")
     print("=" * 60)
     
     # Check XLeVR path
     if not os.path.exists(XLEVR_PATH):
-        print(f"❌ XLeVR path does not exist: {XLEVR_PATH}")
-        print("Please update XLEVR_PATH in the script")
+        logger.error(f"❌ XLeVR path does not exist: {XLEVR_PATH}")
+        logger.error("Please update XLEVR_PATH in the script")
         return
     
     # Create monitor
-    monitor = VRMonitor()
+    monitor = VRMonitor(print_only=True, debug=False)
     
     # Run monitoring
     try:
         asyncio.run(monitor.start_monitoring())
     except KeyboardInterrupt:
-        print("\n👋 XLeVR Monitor stopped by user")
+        logger.info("\n👋 XLeVR Monitor stopped by user")
     except Exception as e:
-        print(f"❌ Unexpected error: {e}")
+        logger.error(f"❌ Unexpected error: {e}")
 
 if __name__ == "__main__":
     main() 

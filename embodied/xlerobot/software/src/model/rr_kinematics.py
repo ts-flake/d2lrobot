@@ -1,5 +1,10 @@
+import logging
+
 import numpy as np
 import matplotlib.pyplot as plt
+
+logger = logging.getLogger(__name__)
+
 
 class RRKinematics:
     """
@@ -45,8 +50,9 @@ class RRKinematics:
         jnt1 = self.offsets[0] + (1 if not self.reversed[0] else -1) * jnt1
         jnt2 = self.offsets[1] + (1 if not self.reversed[1] else -1) * jnt2
         if jnt2 < 0 or jnt2 > np.pi:
+            jnt2_old = jnt2
             jnt2 = np.clip(jnt2, 0, np.pi)
-            print(f"\033[33m[WARNING] RRKinematics: The resultant angle of joint 2 is out of the range of [0, pi]. Clamped to {jnt2:.2f}.\033[0m")
+            logger.warning(f"Joint 2 angle is out of range [0, pi]. Clamped from {jnt2_old:.2f} to {jnt2:.2f}.")
         return jnt1, jnt2
 
     def _convert_to_actual_joint_angles(self, jnt1 : float, jnt2 : float) -> tuple[float, float]:

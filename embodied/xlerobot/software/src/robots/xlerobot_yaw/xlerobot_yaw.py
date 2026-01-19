@@ -1,21 +1,7 @@
 #!/usr/bin/env python
 
-# Copyright 2024 The HuggingFace Inc. team. All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-import logging
 import time
+import logging
 from functools import cached_property
 from itertools import chain
 from typing import Any
@@ -29,18 +15,17 @@ from lerobot.motors.feetech import (
     FeetechMotorsBus,
     OperatingMode,
 )
-
 from ..robot import Robot
 from ..utils import ensure_safe_goal_position
-from .config_xlerobot_yaw import XLerobotYawConfig
+from .config_xlerobot_yaw import XLeRobotYawConfig
 
 logger = logging.getLogger(__name__)
 
 
-class XLerobotYaw(Robot):
+class XLeRobotYaw(Robot):
     """
-    XLerobotYaw 基于 XLerobot V0.3 改装.
-    原始的 XLerobot 包含一个移动底盘 (3 omniwheels) 和两个 SO101 机械臂.
+    XLeRobotYaw 基于 XLeRobot V0.3 改装.
+    原始的 XLeRobot 包含一个移动底盘 (3 omniwheels) 和两个 SO101 机械臂.
     (新增) 改装后的机械臂 SO101Yaw 多加一个 wrist yaw 关节, 一共 6+1 DoFs.
 
     *注意*: 默认电机旋转顺时针为正.
@@ -71,7 +56,7 @@ class XLerobotYaw(Robot):
     - y: left direction
     - z: follows the right-hand rule
     """
-    config_class = XLerobotYawConfig
+    config_class = XLeRobotYawConfig
     name = "xlerobot_yaw"
 
     # Chassis parameters
@@ -80,7 +65,7 @@ class XLerobotYaw(Robot):
     _wheel_max_raw: int = 3000
     _wheel_mounting_angles: list[float] = [240, 0, 120] # left, back, right in clockwise order, in degrees
 
-    def __init__(self, config: XLerobotYawConfig):
+    def __init__(self, config: XLeRobotYawConfig):
         super().__init__(config)
         self.config = config
         self.teleop_keys = config.teleop_keys
@@ -398,7 +383,47 @@ class XLerobotYaw(Robot):
             input(f"Connect the controller board to the '{motor}' motor only and press enter.")
             self.bus2.setup_motor(motor)
             print(f"'{motor}' motor id set to {self.bus2.motors[motor].id}")
-        
+    
+    def _raw_to_deg(self, motor: str, value: int) -> float:
+        _bus = self.bus1 if motor in self.left_arm_motors + self.head_motors else self.bus2
+        max_res = _bus.model_resolution_table[_bus._id_to_model(_bus.motors[motor].id)] - 1
+        _value = (value - int(max_res / 2)) * 360 / max_res
+        if _bus.apply_drive_mode and _bus.calibration[motor].drive_mode:
+            _value = - _value
+        return _value
+
+    def _deg_to_raw(self, motor: str, value: float) -> int:
+        _bus = self.bus1 if motor in self.left_arm_motors + self.head_motors else self.bus2
+        if _bus.apply_drive_mode and _bus.calibration[motor].drive_mode:
+            value = - value
+        max_res = _bus.model_resolution_table[_bus._id_to_model(_bus.motors[motor].id)] - 1
+        _value = (value * max_res / 360) + int(max_res / 2)
+        return _value
+    
+    def _normalize(self, motor: str, value: int) -> float:
+        _bus = self.bus1 if motor in self.left_arm_motors + self.head_motors else self.bus2
+        _id = _bus.motors[motor].id
+        return _bus._normalize({_id: value})[_id]
+
+    def _unnormalize(self, motor: str, value: int) -> float:
+        _bus = self.bus1 if motor in self.left_arm_motors + self.head_motors else self.bus2
+        _id = _bus.motors[motor].id
+        return _bus._unnormalize({_id: value})[_id]
+
+    def _clip_norm_value(self, motor: str,value: float) -> float:
+        norm_mode = (
+            self.bus1.motors[motor].norm_mode
+            if motor in self.left_arm_motors + self.head_motors
+            else self.bus2.motors[motor].norm_mode)
+        if norm_mode == MotorNormMode.RANGE_M100_100:
+            return max(-100.0, min(100.0, value))
+        elif norm_mode == MotorNormMode.RANGE_0_100:
+            return max(0.0, min(100.0, value))
+        elif norm_mode == MotorNormMode.DEGREES:
+            return max(-180.0, min(180.0, value))
+        else:
+            raise ValueError(f"Unsupported normalization mode: {norm_mode}")
+
     def _degps_to_raw(self, degps: float) -> int:
         return int(round(degps * self._step_per_deg))
 
@@ -501,17 +526,17 @@ class XLerobotYaw(Robot):
             "y.vel": y_cmd,
             "theta.vel": theta_cmd,
         }
-
+    
     def get_observation(self) -> dict[str, Any]:
         if not self.is_connected:
             raise DeviceNotConnectedError(f"{self} is not connected.")
 
         # Read actuators position for arm and vel for base
         start = time.perf_counter()
-        left_arm_pos = self.bus1.sync_read("Present_Position", self.left_arm_motors)
-        right_arm_pos = self.bus2.sync_read("Present_Position", self.right_arm_motors)
-        head_pos = self.bus1.sync_read("Present_Position", self.head_motors)
-        base_wheel_vel = self.bus2.sync_read("Present_Velocity", self.base_motors)
+        left_arm_pos = self.bus1.sync_read("Present_Position", self.left_arm_motors, normalize=True)
+        right_arm_pos = self.bus2.sync_read("Present_Position", self.right_arm_motors, normalize=True)
+        head_pos = self.bus1.sync_read("Present_Position", self.head_motors, normalize=True)
+        base_wheel_vel = self.bus2.sync_read("Present_Velocity", self.base_motors, normalize=True)
         
         left_arm_state = {f"{k}.pos": v for k, v in left_arm_pos.items()}
         right_arm_state = {f"{k}.pos": v for k, v in right_arm_pos.items()}
@@ -537,7 +562,7 @@ class XLerobotYaw(Robot):
         return obs_dict
 
     def send_action(self, action: dict[str, float]) -> dict[str, float]:
-        """Command lekiwi to move to a target joint configuration.
+        """Command xlerobot_yaw to move to a target joint configuration.
 
         The relative action magnitude may be clipped depending on the configuration parameter
         `max_relative_target`. In this case, the action sent differs from original action.
@@ -562,7 +587,7 @@ class XLerobotYaw(Robot):
             base_goal_vel.get("theta.vel", 0.0),
         )
         
-        if self.config.max_relative_target is not None:
+        if self.config.max_relative_target is not None and not self.config.skip_goal_position_check:
             # Read present positions for left arm, right arm, and head
             present_pos_left = self.bus1.sync_read("Present_Position", self.left_arm_motors)
             present_pos_right = self.bus2.sync_read("Present_Position", self.right_arm_motors)

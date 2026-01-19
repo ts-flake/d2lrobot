@@ -13,88 +13,129 @@ Important functions to look at if you want to modify the code:
 """
 
 import asyncio
+from dataclasses import dataclass
 import json
 import ssl
 import websockets
-import numpy as np
-import math
 from pprint import pformat
 import logging
-from typing import Dict, Optional, Set
+from typing import Dict, Optional, Set, Tuple
+
+import numpy as np
 from scipy.spatial.transform import Rotation as R
 
+from lerobot.utils.utils import move_cursor_up
 from .base import BaseInputProvider, ControlGoal, ControlMode
 from ..config import XLeVRConfig
 
-logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] %(message)s')
-logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format='[%(levelname)s] %(message)s')
+logger = logging.getLogger('vr_ws_server')
 
-
+@dataclass
 class VRControllerState:
     """State tracking for a VR controller."""
     
-    def __init__(self, hand: str):
-        self.hand = hand
-        self.grip_active = False
-        self.trigger_active = False
-        
-        # Position tracking for relative movement
-        self.origin_position = None
-        self.origin_rotation = None
-        
-        # Quaternion-based rotation tracking (more stable than Euler)
-        self.origin_quaternion = None
-        self.accumulated_rotation_quat = None  # Accumulated rotation as quaternion
-        
-        # Rotation tracking for wrist control
-        self.z_axis_rotation = 0.0  # For wrist_roll
-        self.x_axis_rotation = 0.0  # For wrist_flex (pitch)
-        self.y_axis_rotation = 0.0  # For wrist_yaw
-        
-        # Position tracking
-        self.current_position = None
-        
-        # Rotation tracking
-        self.origin_wrist_angle = 0.0
+    hand: str
+    grip_active: bool = False
+    trigger_active: bool = False
+    origin_position: np.ndarray | None = None # [x, y, z] in meters
+    origin_quaternion: np.ndarray | None = None # [x, y, z, w]
+    prev_position: np.ndarray | None = None
+    prev_quaternion: np.ndarray | None = None
+    curr_position: np.ndarray | None = None
+    curr_quaternion: np.ndarray | None = None
+    delta_position: np.ndarray | None = None
+    delta_quaternion: np.ndarray | None = None
+
+    @property
+    def is_calibrated(self) -> bool:
+        return self.origin_position is not None and self.origin_quaternion is not None
     
-    def reset_grip(self):
-        """Reset grip state but preserve trigger state."""
-        self.grip_active = False
-        self.origin_position = None
-        self.origin_rotation = None
-        self.origin_quaternion = None
-        self.accumulated_rotation_quat = None
-        self.z_axis_rotation = 0.0
-        self.x_axis_rotation = 0.0
-        self.y_axis_rotation = 0.0
+    def calibrate_from_dict(self, position: Dict, quaternion: Dict):
+        position = np.array([position['x'], position['y'], position['z']])
+        quaternion = np.array([quaternion['x'], quaternion['y'], quaternion['z'], quaternion['w']])
+        self.calibrate(position, quaternion)
     
-    def reset_origin(self):
-        """Reset origin position and rotation for auto-control mode."""
+    def calibrate(self, position: np.ndarray, quaternion: np.ndarray):
+        self.origin_position = self.prev_position = self.curr_position = position
+        self.origin_quaternion = self.prev_quaternion = self.curr_quaternion = quaternion
+        logger.info(f"🎯 [{self.hand}] controller calibrated:\n{pformat(dict(position=position, quaternion=quaternion), indent=4)}")
+    
+    @staticmethod
+    def as_transformation_matrix(position: np.ndarray, quaternion: np.ndarray) -> np.ndarray:
+        xmat = np.eye(4)
+        xmat[:3, :3] = R.from_quat(quaternion, scalar_first=False).as_matrix()
+        xmat[:3, 3] = position
+        return xmat
+    
+    @staticmethod
+    def as_rotation_matrix(quaternion: np.ndarray) -> np.ndarray:
+        return R.from_quat(quaternion, scalar_first=False).as_matrix()
+    
+    @staticmethod
+    def as_rotvec(quaternion: np.ndarray, degrees: bool = True) -> np.ndarray:
+        rotvec = R.from_quat(quaternion, scalar_first=False).as_rotvec()
+        return rotvec * (180.0 / np.pi) if degrees else rotvec
+    
+    def reset(self, keep_grip: bool = False, keep_trigger: bool = True):
+        """Reset controller state."""
+        if not keep_grip:
+            self.grip_active = False
+        if not keep_trigger:
+            self.trigger_active = False
         self.origin_position = None
-        self.origin_rotation = None
         self.origin_quaternion = None
-        self.accumulated_rotation_quat = None
-        self.z_axis_rotation = 0.0
-        self.x_axis_rotation = 0.0
-        self.y_axis_rotation = 0.0
+        self.prev_position = None
+        self.prev_quaternion = None
+        self.curr_position = None
+        self.curr_quaternion = None
+        self.delta_position = None
+        self.delta_quaternion = None
+
+def euler_to_quat(euler_deg: np.ndarray) -> np.ndarray:
+    return R.from_euler('xyz', euler_deg, degrees=True).as_quat(scalar_first=False)
+
+def update_controller_state(controller: VRControllerState, position: np.ndarray, quaternion: np.ndarray) -> None:
+    controller.prev_position = controller.curr_position
+    controller.prev_quaternion = controller.curr_quaternion
+    controller.curr_position = position.copy()
+    controller.curr_quaternion = quaternion.copy()
+
+def calculate_delta_state(controller: VRControllerState, in_local: bool = True) -> Tuple[np.ndarray, np.ndarray]:
+    """Compute the delta pose (position and quaternion) of the controller.
+    If in_local is True, the delta pose is in the local coordinate of the controller (origin frame).
+    If in_local is False, the delta pose is in the global coordinate.
+    """
+    # In world frame
+    delta_position = controller.curr_position - controller.prev_position
+    prev_rot = controller.as_rotation_matrix(controller.prev_quaternion)
+    curr_rot = controller.as_rotation_matrix(controller.curr_quaternion)
+    delta_rot = curr_rot @ prev_rot.T
+    
+    # In local frame
+    if in_local:
+        wRb = controller.as_rotation_matrix(controller.origin_quaternion)
+        delta_position = wRb.T @ delta_position
+        delta_rot = wRb.T @ delta_rot @ wRb
+    return delta_position, R.from_matrix(delta_rot).as_quat(scalar_first=False)
 
 class VRWebSocketServer(BaseInputProvider):
     """WebSocket server for VR controller input."""
     
-    def __init__(self, command_queue: asyncio.Queue, config: XLeVRConfig, print_only: bool = False):
+    def __init__(self, command_queue: asyncio.Queue, config: XLeVRConfig, print_only: bool = False, debug: bool = False):
         super().__init__(command_queue)
         self.config = config
         self.clients: Set = set()
         self.server = None
         self.print_only = print_only  # New flag for print-only mode
+        self.debug = debug  # New flag for logging debug information
+        self._need_calibration = False
         
         # Controller states
         self.left_controller = VRControllerState("left")
         self.right_controller = VRControllerState("right")
+        self.headset_controller = VRControllerState("headset")
         
-        # Robot state tracking (for relative position calculation)
-        self.left_arm_origin_position = None
-        self.right_arm_origin_position = None
     
     def setup_ssl(self) -> Optional[ssl.SSLContext]:
         """Setup SSL context for WebSocket server."""
@@ -181,8 +222,7 @@ class VRWebSocketServer(BaseInputProvider):
             await self.handle_grip_release('right')
             logger.info(f"VR client {client_address} cleanup complete")
     
-    async def process_controller_data(self, data: Dict):
-        """Process incoming VR controller data."""
+    def print_headset_and_controllers_data(self, data: Dict):
         # 检查是否有摇杆或按钮操作，只在有操作时打印
         has_thumbstick_or_button_activity = False
         thumbstick_info = []
@@ -218,9 +258,8 @@ class VRWebSocketServer(BaseInputProvider):
         
         # 只在有操作时打印
         if has_thumbstick_or_button_activity:
-            logger.debug(f"[VR_WS] Activity detected: Thumbstick - {pformat(thumbstick_info)}; Buttons - {pformat(button_info)}")
+            print(f"[VR_WS] Activity detected: Thumbstick - {pformat(thumbstick_info)}; Buttons - {pformat(button_info)}")
         
-        # 处理头部数据 (若存在)
         if 'headset' in data:
             headset_data = data['headset']
             if headset_data and headset_data.get('position'):
@@ -228,248 +267,195 @@ class VRWebSocketServer(BaseInputProvider):
                 rot = headset_data.get('rotation', {})
                 quat = headset_data.get('quaternion', {})
                 
-                logger.debug(
+                print(
                     f"[VR_WS] Headset - Position: [{pos.get('x', 0):.3f}, {pos.get('y', 0):.3f}, {pos.get('z', 0):.3f}], "
                     f"Rotation: [{rot.get('x', 0):.1f}, {rot.get('y', 0):.1f}, {rot.get('z', 0):.1f}]"
                 )
-                
-                # Create headset ControlGoal
-                headset_position = np.array([pos.get('x', 0), pos.get('y', 0), pos.get('z', 0)])
-                headset_goal = ControlGoal(
-                    arm="headset",
-                    mode=ControlMode.POSITION_CONTROL,
-                    target_position=headset_position,
-                    wrist_yaw_deg=-rot.get('y', 0),   # Yaw rotation
-                    wrist_flex_deg=-rot.get('x', 0),  # Pitch rotation
-                    metadata={
-                        "source": "vr_headset",
-                        "relative_position": False,
-                        "vr_position": headset_position.tolist(),
-                        "rotation": rot,
-                        "quaternion": quat
-                    }
-                )
-                await self.send_goal(headset_goal)
-        
-        # 处理手柄数据
+
+    def _do_calibration(self, data: Dict):
+        def _calibrate(ctrl, data):
+            position = data.get('position', None)
+            quaternion = data.get('quaternion', None)
+            euler = data.get('rotation', None)
+            if quaternion is None and euler is not None:
+                quaternion_array = euler_to_quat(np.array([euler['x'], euler['y'], euler['z']]))
+                quaternion = {
+                    'x': quaternion_array[0],
+                    'y': quaternion_array[1],
+                    'z': quaternion_array[2],
+                    'w': quaternion_array[3]
+                }
+            ctrl.reset()
+            ctrl.calibrate_from_dict(position, quaternion)
+
+        all_calibrated = True
+        if 'headset' in data:
+            _calibrate(self.headset_controller, data['headset'])
+            all_calibrated &= self.headset_controller.is_calibrated
         if 'leftController' in data:
-            await self.process_single_controller('left', data['leftController'])
-        
+            _calibrate(self.left_controller, data['leftController'])
+            all_calibrated &= self.left_controller.is_calibrated
         if 'rightController' in data:
-            await self.process_single_controller('right', data['rightController'])
+            _calibrate(self.right_controller, data['rightController'])
+            all_calibrated &= self.right_controller.is_calibrated
+        
+        if all_calibrated:
+            logger.info("✅ VR calibration done successfully")
+            self._need_calibration = False
+        else:
+            logger.warning("❌ VR calibration failed, retry...")
+            move_cursor_up(1)
+            self._need_calibration = True
     
-    async def process_single_controller(self, hand: str, data: Dict):
+    @property
+    def is_calibrated(self) -> bool:
+        return not self._need_calibration
+    
+    def calibrate(self):
+        self._need_calibration = True
+
+    async def process_controller_data(self, data: Dict):
+        """Process incoming VR controller data."""
+
+        if self.debug:
+            self.print_headset_and_controllers_data(data)
+        
+        if self._need_calibration and 'rightController' in data and data['rightController'].get('buttons', {}).get('b', False):
+            self._do_calibration(data)
+            return
+
+        if 'headset' in data and self.headset_controller.is_calibrated:
+            await self.process_single_controller(self.headset_controller, data['headset'])
+        
+        if 'leftController' in data and self.left_controller.is_calibrated:
+            await self.process_single_controller(self.left_controller, data['leftController'])
+        
+        if 'rightController' in data and self.right_controller.is_calibrated:
+            await self.process_single_controller(self.right_controller, data['rightController'])
+    
+    async def process_single_controller(self, controller: VRControllerState, data: Dict):
         """Process data for a single controller."""
         position = data.get('position', {})
-        rotation = data.get('rotation', {})
+        euler = data.get('rotation', {}) # xyz (extrinsic) in degrees
         quaternion = data.get('quaternion', {})  # Get quaternion data directly
-        grip_active = data.get('gripActive', False)
+        grip_active = data.get('gripActive', False) # Not used anymore
         trigger = data.get('trigger', 0)
         thumbstick = data.get('thumbstick', {})
         buttons = data.get('buttons', {}) # Get buttons data
+        hand = controller.hand # Name of the controller
         
-        controller = self.left_controller if hand == 'left' else self.right_controller
+        # Convert to numpy arrays
+        position = (
+            np.array([position['x'], position['y'], position['z']])
+            if position and all(k in position for k in ['x', 'y', 'z'])
+            else None
+        )
+        euler = (
+            np.array([euler['x'], euler['y'], euler['z']])
+            if euler and all(k in euler for k in ['x', 'y', 'z'])
+            else None
+        )
+        quaternion = (
+            np.array([quaternion['x'], quaternion['y'], quaternion['z'], quaternion['w']])
+            if quaternion and all(k in quaternion for k in ['x', 'y', 'z', 'w'])
+            else None
+        )
+        if quaternion is None and euler is not None:
+            quaternion = euler_to_quat(euler)
         
+        # Transform from the controller frame to the robot frame
+        # Controller frame (seen in VR): x (right), y (up), z (back)
+        # Robot frame: x (forward), y (left), z (up)
+        bRc = np.array(
+            [
+                [0, -1, 0],
+                [0,  0, 1],
+                [-1, 0, 0]
+            ]
+        ).T
+
+        # Headset control
+        if hand == 'headset' and position is not None and quaternion is not None:
+            update_controller_state(controller, position, quaternion)
+            delta_position, delta_quaternion = calculate_delta_state(controller, in_local=True)
+            controller.delta_position = delta_position
+            controller.delta_quaternion = delta_quaternion
+            delta_rotvec = controller.as_rotvec(delta_quaternion, degrees=True)
+            
+            # Target position and rotation in robot frame
+            target_position = bRc @ delta_position * self.config.vr_to_robot_scale
+            target_rpy = bRc @ delta_rotvec
+            goal = ControlGoal(
+                arm=hand,
+                mode=ControlMode.POSITION_CONTROL,
+                target_position=target_position,
+                wrist_flex_deg=target_rpy[1],
+                wrist_yaw_deg=target_rpy[2],
+                metadata={
+                    "source": "vr_headset",
+                    "delta_position": True,
+                    "vr_to_robot_scale": self.config.vr_to_robot_scale,
+                    "local_frame": True,
+                    "controller_state": controller, # unscaled, and in controller frame
+                    "controller_to_robot_transform": bRc,
+                }
+            )
+            await self.send_goal(goal)
+            return # Skip gripper control for headset
+
         # Handle trigger for gripper control
         trigger_active = trigger > 0.5
         if trigger_active != controller.trigger_active:
             controller.trigger_active = trigger_active
             
-            # Send gripper control goal - do not specify mode to avoid interfering with position control
-            # Reverse behavior: gripper open by default, closes when trigger pressed
-            gripper_goal = ControlGoal(
-                arm=hand,
-                gripper_closed=not trigger_active,  # Inverted: closed when trigger NOT active
-                metadata={
-                    "source": "vr_trigger",
-                    "trigger": trigger,
-                    "trigger_active": trigger_active,
-                    "thumbstick": thumbstick,
-                    "buttons": buttons
-                }
-            )
-            await self.send_goal(gripper_goal)
-            
-            # logger.info(f"🤏 {hand.upper()} gripper {'OPENED' if trigger_active else 'CLOSED'}")
+            # # Send gripper control goal - do not specify mode to avoid interfering with position control
+            # # Reverse behavior: gripper open by default, closes when trigger pressed
+            # gripper_goal = ControlGoal(
+            #     arm=hand,
+            #     gripper_closed=not trigger_active,  # Inverted: closed when trigger NOT active
+            #     metadata={
+            #         "source": "vr_trigger",
+            #         "trigger": trigger,
+            #         "trigger_active": trigger_active,
+            #         "thumbstick": thumbstick,
+            #         "buttons": buttons
+            #     }
+            # )
+            # await self.send_goal(gripper_goal)
+            logger.info(f"🤏 {hand.upper()} gripper {'ACTIVE' if trigger_active else 'INACTIVE'}")
         
-        # 修改：直接响应控制器位置，不需要按squeeze键
-        # 检查是否有位置数据
-        if position and all(k in position for k in ['x', 'y', 'z']):
-            # 如果还没有设置原点，设置当前位置为原点
-            if controller.origin_position is None:
-                controller.origin_position = np.array([position.get('x', 0), position.get('y', 0), position.get('z', 0)])
-                
-                # 设置四元数原点
-                if quaternion and all(k in quaternion for k in ['x', 'y', 'z', 'w']):
-                    controller.origin_quaternion = np.array([quaternion['x'], quaternion['y'], quaternion['z'], quaternion['w']])
-                else:
-                    controller.origin_quaternion = self.euler_to_quaternion(rotation) if rotation else None
-                
-                controller.accumulated_rotation_quat = controller.origin_quaternion
-                controller.z_axis_rotation = 0.0
-                controller.x_axis_rotation = 0.0
-                controller.y_axis_rotation = 0.0
-                
-                # 发送重置信号
-                reset_goal = ControlGoal(
-                    arm=hand,
-                    mode=ControlMode.POSITION_CONTROL,
-                    target_position=None,
-                    metadata={
-                        "source": f"vr_auto_reset_{hand}",
-                        "reset_target_to_current": True,
-                        "trigger": trigger,
-                        "trigger_active": trigger_active,
-                        "thumbstick": thumbstick,
-                        "buttons": buttons
-                    }
-                )
-                await self.send_goal(reset_goal)
-                logger.info(f"🎯 {hand.upper()} auto-activated - controlling {hand} arm")
-            
-            # 计算目标位置 - 改为绝对位置控制
-            absolute_position = np.array([position.get('x', 0), position.get('y', 0), position.get('z', 0)])
-            
-            # Convert to local frame
-            wRb = R.from_quat(controller.origin_quaternion, scalar_first=False).as_matrix()
-            absolute_position_local = wRb.T @ absolute_position
-            
-            # 直接使用VR控制器的绝对位置，应用缩放
-            absolute_position_local_scaled = absolute_position_local * self.config.vr_to_robot_scale
-            
-            # 计算手腕旋转
-            if controller.origin_quaternion is not None:
-                if quaternion and all(k in quaternion for k in ['x', 'y', 'z', 'w']):
-                    current_quat = np.array([quaternion['x'], quaternion['y'], quaternion['z'], quaternion['w']])
-                    self.update_quaternion_rotation_direct(controller, current_quat)
-                else:
-                    self.update_quaternion_rotation(controller, rotation)
-                
-                # Delta rotation vector (in origin frame)
-                xyz_rotations = self.extract_rpy_from_quaternion(controller.accumulated_rotation_quat, controller.origin_quaternion)
-               
-                # Convert to local frame
-                xyz_rotations_local = wRb.T @ xyz_rotations
-                controller.x_axis_rotation = xyz_rotations_local[0]
-                controller.y_axis_rotation = xyz_rotations_local[1]
-                controller.z_axis_rotation = xyz_rotations_local[2]
-            
-            # 创建绝对位置控制目标 (local frame)
-            goal = ControlGoal(
-                arm=hand,
-                mode=ControlMode.POSITION_CONTROL,
-                target_position=absolute_position_local,  # 绝对位置 (local frame)
-                wrist_roll_deg=controller.z_axis_rotation,   # 左转为正
-                wrist_flex_deg=-controller.x_axis_rotation,  # 上转为负, pitch
-                wrist_yaw_deg=-controller.y_axis_rotation,   # 右转为正
-                metadata={
-                    "source": "vr_absolute_position_local",
-                    "relative_position": False,  # 标记为绝对位置
-                    "vr_position": absolute_position_local.tolist(),
-                    "scaled_position": absolute_position_local_scaled.tolist(),
-                    "trigger": trigger,
-                    "trigger_active": trigger_active,
-                    "thumbstick": thumbstick,
-                    "buttons": buttons
-                }
-            )
-            await self.send_goal(goal)
+        # Always send goal regardless of grip_active,
+        # the behavior is controlled by downstream process
+        update_controller_state(controller, position, quaternion)
+        delta_position, delta_quaternion = calculate_delta_state(controller, in_local=True)
+        controller.delta_position = delta_position
+        controller.delta_quaternion = delta_quaternion
+        delta_rotvec = controller.as_rotvec(delta_quaternion, degrees=True)
         
-        # 保留原有的squeeze键逻辑作为备用（可选）
-        # 如果你想完全移除squeeze键控制，可以注释掉下面的代码
-        """
-        # Handle grip button for arm movement control (original logic)
-        if grip_active:
-            if not controller.grip_active:
-                print_pose()
-                # Grip just activated - set origin and reset target position
-                controller.grip_active = True
-                # Convert position dict to numpy array for proper subtraction later
-                controller.origin_position = np.array([position.get('x', 0), position.get('y', 0), position.get('z', 0)])
-                
-                # Use quaternion data directly if available, otherwise fall back to Euler conversion
-                if quaternion and all(k in quaternion for k in ['x', 'y', 'z', 'w']):
-                    controller.origin_quaternion = np.array([quaternion['x'], quaternion['y'], quaternion['z'], quaternion['w']])
-                    controller.origin_rotation = controller.origin_quaternion  # Store for compatibility
-                else:
-                    # Fallback to Euler angle conversion
-                    controller.origin_quaternion = self.euler_to_quaternion(rotation) if rotation else None
-                    controller.origin_rotation = controller.origin_quaternion
-                
-                controller.accumulated_rotation_quat = controller.origin_quaternion
-                controller.z_axis_rotation = 0.0
-                controller.x_axis_rotation = 0.0
-                
-                # Send reset signal to control loop to reset target position to current robot position
-                reset_goal = ControlGoal(
-                    arm=hand,
-                    mode=ControlMode.POSITION_CONTROL,  # Keep in position control
-                    target_position=None,  # Special signal
-                    metadata={
-                        "source": f"vr_grip_reset_{hand}",
-                        "reset_target_to_current": True,  # Signal to reset target to current position
-                        "trigger": trigger,
-                        "trigger_active": trigger_active,
-                        "thumbstick": thumbstick
-                    }
-                )
-                await self.send_goal(reset_goal)
-                
-                logger.info(f"🔒 {hand.upper()} grip activated - controlling {hand} arm (target reset to current position)")
-            
-            # Compute target position
-            if controller.origin_position is not None:
-                # Convert position dict to numpy array for proper subtraction
-                position_array = np.array([position.get('x', 0), position.get('y', 0), position.get('z', 0)])
-                
-                # Ensure origin_position is a numpy array
-                if isinstance(controller.origin_position, dict):
-                    # If origin_position is still a dict, convert it to numpy array
-                    logger.warning(f"origin_position was dict, converting to numpy array for {hand} controller")
-                    controller.origin_position = np.array([controller.origin_position.get('x', 0), controller.origin_position.get('y', 0), controller.origin_position.get('z', 0)])
-                elif not isinstance(controller.origin_position, np.ndarray):
-                    # If origin_position is neither dict nor numpy array, log warning and skip
-                    logger.warning(f"origin_position is {type(controller.origin_position)}, skipping position calculation for {hand} controller")
-                    return
-                
-                relative_delta = (position_array - controller.origin_position) * self.config.vr_to_robot_scale
-                
-                # Calculate Z-axis rotation for wrist_roll control
-                # Calculate X-axis rotation for wrist_flex control
-                if controller.origin_quaternion is not None:
-                    # Update quaternion-based rotation tracking
-                    if quaternion and all(k in quaternion for k in ['x', 'y', 'z', 'w']):
-                        # Use quaternion data directly
-                        current_quat = np.array([quaternion['x'], quaternion['y'], quaternion['z'], quaternion['w']])
-                        self.update_quaternion_rotation_direct(controller, current_quat)
-                    else:
-                        # Fallback to Euler angle conversion
-                        self.update_quaternion_rotation(controller, rotation)
-                    
-                    # Get accumulated rotations from quaternion
-                    controller.z_axis_rotation = self.extract_roll_from_quaternion(controller.accumulated_rotation_quat, controller.origin_quaternion)
-                    controller.x_axis_rotation = self.extract_pitch_from_quaternion(controller.accumulated_rotation_quat, controller.origin_quaternion)
-                
-                # Create position control goal
-                # Note: We send relative position here, the control loop will handle
-                # adding it to the robot's current position
-                goal = ControlGoal(
-                    arm=hand,
-                    mode=ControlMode.POSITION_CONTROL,
-                    target_position=relative_delta,  # Relative position delta
-                    wrist_roll_deg=-controller.z_axis_rotation,
-                    wrist_flex_deg=-controller.x_axis_rotation,
-                    metadata={
-                        "source": "vr_grip",
-                        "relative_position": True,
-                        "origin_position": controller.origin_position.tolist(),
-                        "trigger": trigger,
-                        "trigger_active": trigger_active,
-                        "thumbstick": thumbstick
-                    }
-                )
-                await self.send_goal(goal)
-        """
+        # Target position and rotation in robot frame
+        target_position = bRc @ delta_position * self.config.vr_to_robot_scale
+        target_rpy = bRc @ delta_rotvec
+        goal = ControlGoal(
+            arm=hand,
+            mode=ControlMode.POSITION_CONTROL,
+            target_position=target_position,
+            wrist_roll_deg=target_rpy[0],
+            wrist_flex_deg=target_rpy[1],
+            wrist_yaw_deg=target_rpy[2],
+            metadata={
+                "source": "vr_controller",
+                "delta_position": True,
+                "vr_to_robot_scale": self.config.vr_to_robot_scale,
+                "local_frame": True,
+                "controller_state": controller, # unscaled, and in controller frame
+                "controller_to_robot_transform": bRc,
+                "trigger": trigger,
+                "trigger_active": trigger_active,
+                "thumbstick": thumbstick,
+                "buttons": buttons
+            }
+        )
+        await self.send_goal(goal)
     
     async def handle_grip_release(self, hand: str):
         """Handle grip release for a controller."""
@@ -481,7 +467,7 @@ class VRWebSocketServer(BaseInputProvider):
             return
         
         if controller.grip_active:
-            controller.reset_grip()
+            controller.reset(keep_grip=True)
             
             # Send idle goal to stop arm control
             goal = ControlGoal(
@@ -498,73 +484,7 @@ class VRWebSocketServer(BaseInputProvider):
             await self.send_goal(goal)
             
             logger.info(f"🔓 {hand.upper()} grip released - arm control stopped")
-    
-    async def handle_trigger_release(self, hand: str):
-        """Handle trigger release for a controller."""
-        controller = self.left_controller if hand == 'left' else self.right_controller
-        
-        if controller.trigger_active:
-            controller.trigger_active = False
-            
-            # Send gripper closed goal - reversed behavior: gripper closes when trigger released
-            goal = ControlGoal(
-                arm=hand,
-                gripper_closed=True,  # Close gripper when trigger released
-                metadata={
-                    "source": "vr_trigger_release",
-                    "trigger": 0.0,
-                    "trigger_active": False,
-                    "thumbstick": {},
-                    "buttons": {}
-                }
-            )
-            await self.send_goal(goal)
-            
-            logger.info(f"🤏 {hand.upper()} gripper CLOSED (trigger released)")
-    
-    def euler_to_quaternion(self, euler_deg: Dict[str, float]) -> np.ndarray:
-        """Convert Euler angles in degrees to quaternion [x, y, z, w]."""
-        euler_rad = [math.radians(euler_deg['x']), math.radians(euler_deg['y']), math.radians(euler_deg['z'])]
-        rotation = R.from_euler('xyz', euler_rad)
-        return rotation.as_quat()
-    
-    def update_quaternion_rotation(self, controller: VRControllerState, current_euler: dict):
-        """Update quaternion-based rotation tracking."""
-        if not current_euler:
-            return
-        
-        # Convert current Euler to quaternion
-        current_quat = self.euler_to_quaternion(current_euler)
-        
-        # Store current quaternion for accumulated rotation calculation
-        controller.accumulated_rotation_quat = current_quat
-    
-    def update_quaternion_rotation_direct(self, controller: VRControllerState, current_quat: np.ndarray):
-        """Update quaternion-based rotation tracking using quaternion data directly."""
-        if current_quat is None:
-            return
-        
-        # Store current quaternion for accumulated rotation calculation
-        controller.accumulated_rotation_quat = current_quat
-    
-    def extract_rpy_from_quaternion(self, current_quat: np.ndarray, origin_quat: np.ndarray) -> np.ndarray:
-        """Extract roll (z-axis), pitch (x-axis), yaw (y-axis) from relative quaternion rotation."""
-        if current_quat is None or origin_quat is None:
-            return np.array([0.0, 0.0, 0.0])
-        
-        try:
-            # Calculate relative rotation quaternion (from origin to current)
-            origin_rotation = R.from_quat(origin_quat)
-            current_rotation = R.from_quat(current_quat)
-            relative_rotation = current_rotation * origin_rotation.inv()
-            
-            # Represent the relative rotation as a rotation vector in the origin frame
-            rotvec = relative_rotation.as_rotvec() # in radians
-            return np.rad2deg(rotvec) # in degrees
-        except Exception as e:
-            logger.warning(f"Error extracting rpy from quaternion: {e}")
-            return np.array([0.0, 0.0, 0.0])
-    
+
     async def send_goal(self, goal: ControlGoal):
         """Send a control goal to the command queue or print it if in print-only mode."""
         if self.print_only:
@@ -578,10 +498,12 @@ class VRWebSocketServer(BaseInputProvider):
                 print(f"   Wrist Roll: {goal.wrist_roll_deg:.1f}°")
             if goal.wrist_flex_deg is not None:
                 print(f"   Wrist Flex: {goal.wrist_flex_deg:.1f}°")
+            if goal.wrist_yaw_deg is not None:
+                print(f"   Wrist Yaw: {goal.wrist_yaw_deg:.1f}°")
             if goal.gripper_closed is not None:
                 print(f"   Gripper: {'CLOSED' if goal.gripper_closed else 'OPEN'}")
             if goal.metadata:
-                print(f"   Metadata: {goal.metadata}")
+                print(f"   Metadata: {pformat(goal.metadata, indent=4)}")
             print()
         else:
             # Use the parent class method to send to queue

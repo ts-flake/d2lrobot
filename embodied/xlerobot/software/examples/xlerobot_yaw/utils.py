@@ -42,7 +42,7 @@ class AnsiColorEncoder:
                 format_list.append(str(min(sum(codes), 7) + 40 + light)) # background color starts at 40
         return f'\033[{";".join(format_list)}m{text}\033[0m'
 
-def init_logging(
+def init_color_logging(
     console_level: str = "INFO"
 ):
     """
@@ -93,10 +93,10 @@ def init_logging(
     console_handler.setLevel(console_level.upper())
     logger.addHandler(console_handler)
 
-    return logger
 
 if __name__ == "__main__":
-    logger = init_logging('debug')
+    init_color_logging('debug')
+    logger = logging.getLogger(__name__)
     print(f"logger name: {logger.name}")
     print(f"logger level: {logger.getEffectiveLevel()}")
     logger.debug("Hello, world!")
