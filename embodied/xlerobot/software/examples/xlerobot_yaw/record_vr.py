@@ -32,7 +32,7 @@ from lerobot.utils.robot_utils import busy_wait
 from lerobot.utils.visualization_utils import init_rerun, log_rerun_data
 from lerobot.scripts.lerobot_record import DatasetRecordConfig, RecordConfig, record_loop
 from lerobot.utils.utils import log_say
-from ..xlerobot.utils import init_color_logging
+from lerobot.utils.color_logger import init_color_logging
 
 @dataclass
 class Config:

@@ -27,7 +27,7 @@ from lerobot.teleoperators.xlerobot_vr import XLeRobotVR, XLeRobotVRConfig
 from lerobot.utils.robot_utils import busy_wait
 from lerobot.utils.visualization_utils import init_rerun, log_rerun_data
 
-from utils import init_color_logging
+from lerobot.utils.color_logger import init_color_logging
 
 @dataclass
 class Config:

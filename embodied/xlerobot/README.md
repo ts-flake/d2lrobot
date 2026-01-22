@@ -1,49 +1,75 @@
-## 1. Intro
+## 1. Introduction
 
-This repo is based on the XLeRobot [[Link](https://github.com/Vector-Wangel/XLeRobot/tree/main)]. We provide the codes to teleoperate and record dataset using the bimanual SO101-yaw (6DoF) platform [[Link](https://makerworld.com/en/models/1913316-so101-arm-wrist-yaw-6dof#profileId-2088553)].
+This repo is based on the XLeRobot [[Link](https://github.com/Vector-Wangel/XLeRobot/tree/main)]. Below are some key changes...
+
+- LeRobot-styled teleoperation, i.e., using a **Teleoperator** and **Robot Processors**, thus this increases code reusability
+- Better code readability with detailed comments and clear parameter names
+- Easier ways to set configurations via `TeleoperatorConfig` or CLI
+- **Improved VR control experience** with added keymaps for more actions such as 'back to zero/home', 'exit', and 'reset reference frame' (I found this is very useful when you drive the robot around and still be able to reposition yourself)
+- **Smoothier base movements**. Using the `EMAJointAction` processor, the three-wheeled base now starts off gently and stops pointly
+- (Optional) Support SO101-yaw arm (SO101 + 1 dof wrist yaw) \[[Hardware](https://makerworld.com/en/models/1913316-so101-arm-wrist-yaw-6dof#profileId-2088553)\]
+
+
 
 ## 2. Installation
 
-> [!NOTE]
+> [!IMPORTANT]
 > 
 >  Before you start:
 > 
 > - Have the physical platform (XLeRobot) ready
 > 
+> - If you want to try XLeRobot-yaw, ensure you have reconfigured motor ids (\[[Bambot]([Feetech Servo Control Panel - feetech.js](https://bambot.org/feetech.js?lang=en))\])...
+>   
+>   - left arm (7 dof) + head (2dof): id 1 to 9
+>   
+>   - right arm (7 dof) + base (3 dof): id 1 to 10
+> 
 > - Install the `lerobot`
 
 ### 2.1 Move files
 
-The installation is minimal, you only need to copy/move some files. The folder structre is the same as `lerobot`, for example:
+The installation is minimal, you only need to copy/move some files. The folder structure is the same as `lerobot`, specifically:
 
 ```
 software/
-    - examples
-        - xlerobot_yaw  --> move to lerobot/examples
-    - src/
-        - model/rr_kinematics.py  --> move to lerobot/src/lerobot/model
-        - robots/
-            - xlerobot_yaw/  --> move to lerobot/src/lerobot/robots
-        - ...
+├── examples/               --> move to lerobot/examples/
+│   ├── xlerobot/
+│   └── xlerobot_yaw/
+└── src/
+    ├── model/              --> move to lerobot/src/lerobot/model
+    │   └── rr_kinematics.py
+    ├── robots/             --> move to lerobot/src/lerobot/robots
+    │   ├── xlerobot/
+    │   └── xlerobot_yaw/
+    └── teleoperators/      --> move to lerobot/src/lerobot/teleoperators
+        ├── xlerobot_vr/
+        └── xlerobot_yaw_vr/
 ```
 
 ### 2.2 Modifiy codes
 
 You still need to update a few lines of codes.
 
-- In `.../teleoperators/xlerobot_yaw_vr/vr_monitor.py` around line 21, set the variable `XLEVR_PATH`.
+- In `.../teleoperators/xlerobot_vr/vr_monitor.py` around line 21, set the variable `XLEVR_PATH`.
 
 - In `lerobot/src/lerobot/robots/utils.py` around line 65, add
   
   ```python
+  elif config.type == "xlerobot":
+      from .xlerobot import XLeRobot
+      return XLeRobot(config)
   elif config.type == "xlerobot_yaw":
       from .xlerobot_yaw import XLeRobotYaw
-      return XLeRobotYaw(config)
+      return XLeRobotYaw(config)
   ```
 
 - In `lerobot/src/lerobot/teleoperators/utils.py` around line 80, add
   
   ```python
+  elif config.type == "xlerobot_vr":
+      from .xlerobot_vr import XLeRobotVR
+      return XLeRobotVR(config)
   elif config.type == "xlerobot_yaw_vr":
       from .xlerobot_yaw_vr import XLeRobotYawVR
       return XLeRobotYawVR(config)
@@ -51,48 +77,63 @@ You still need to update a few lines of codes.
 
 ## 3. Usages
 
-To teleoperate XLeRobot using a VR (Quest3), go to `lerobot/examples/xlerobot_yaw` and run:
+To teleoperate XLeRobot using a VR (Quest3), go to `lerobot/examples/xlerobot` and run:
 
 ```bash
 python teleoperate_vr.py \
---robot.id xlerobot_yaw01 \
+--robot.id [your_robot_name] \
 --teleop.fps 30 \
 --display_data true
 ```
 
+To record dataset, go to `lerobot/examples/xlerobot` and run:
+
+```bash
+python record_vr.py \
+--robot.id [your_robot_name] \
+--teleop.fps 30 \
+--teleop.record_dataset true \
+--dataset.repo_id [user/folder] \
+--dataset.single_task [task_name] \
+--dataset.num_episodes 50 \
+--dataset.push_to_hub true \
+--display_data true
+```
+
+
+
 The full list of parameters can be found in...
 
-- `.../robots/xlerobot_yaw/config_xlerobot_yaw.py`
+- `.../robots/xlerobot/config_xlerobot.py`
 
-- `.../teleoperators/xlerobot_yaw_vr/config_xlerobot_yaw_vr.py`
+- `.../teleoperators/xlerobot_vr/config_xlerobot_vr.py`
+
+
 
 ## 4. Changes
 
-### 4.1 IK
+### 4.1 Inverse Kinematics
 
-The `RRKinematics` class in `software/src/model/rr_kinematics.py` is essentially a refactoring of the `SO101Kinematics` from the XLeRobot, with a detailed comment on the angle definitions and better namings.
+The `RRKinematics` class in `software/src/model/rr_kinematics.py` is essentially a refactoring of the `SO101Kinematics` from the XLeRobot, with a detailed comment on the angle definitions and better naming.
 
 ### 4.2 XLeVR
 
-The `wrist_yaw_deg` is a newly added field to `ControlGoal` for the SO101-yaw (or any 6DoF) robot arm.
+The `wrist_yaw_deg` is a newly added field to `ControlGoal` for the SO101-yaw (or any 6DoF) robot arm. For the SO101 arm, this value is ignored.
 
 Significant changes to `XLeVR/xlevr/inputs/vr_ws_server.py`:
 
-- `VRControllerState` now records the prev/curr position/quaternion to faciliate delta position/quaternion computation
+- `VRControllerState` now records the prev/curr-position/quaternion to facilitate delta position/quaternion computation
 
-- `VRWebSocketServer` sends delta EE commands, in the **robot's frame**, i.e., forward (x), left (y), upward (z):
+- `VRWebSocketServer` sends **delta EE** commands, in the **robot's frame**, i.e., forward (x), left (y), upward (z):
   
   - `target_position`: (dx, dy, dz)
-  
-  - `wrist_roll_deg`: x-axis rotation (angle directions follow the right hand rule)
-  
+  - `wrist_roll_deg`: x-axis rotation (angle directions follow the right-hand rule)
   - `wrist_flex_deg`: pitch, y-axis rotation
-  
   - `wrist_yaw_deg`: z-axis rotation
-  
-  Note that in the codes, the delta actions are expressed in the local/body frame (`origin_quaternion`) first and then converted to the robot's frame.
 
-- The original squeeze-to-teleoperate logic is pushed to downstreams, all necessary information is stored in `metadata`. E.g., the user can decide the behavior of the controller when `metadata['buttons']['squeeze']` is true.
+- The **original squeeze-to-teleoperate logic is pushed to downstreams**, and all necessary information is stored in `metadata`. E.g., the user can decide the behavior of the controller when `metadata['buttons']['squeeze']` is true.
+  
+  > ***Note:*** In the codes, the delta actions are expressed in the local/body frame (`origin_quaternion`) first and then converted to the robot's frame.
   
   ```python
   metadata = {
@@ -110,28 +151,22 @@ Significant changes to `XLeVR/xlevr/inputs/vr_ws_server.py`:
   }
   ```
 
-### 4.3 Controller Keymap: SO101_yaw
+### 4.3 Controller Keymaps: In Teleoperator
 
-Below are the default keymaps used for SO101_yaw.
+Below are the default keymaps for the Quest3 VR controller.
 
 **Left controller**
 
-- **thumbstick**: not configured
-- **trigger**: open / close left gripper (toggled by pressing button A)
-- **grip (squeeze) button**: freeze / unfreeze left arm (set by `grip_to_activate` in `XLeRobotYawVRConfig`)
-- **X button**: quit and move back to initial position
-- **Y button**: move back to zero position
-
-
+- **thumbstick**: Reserved for recording actions, e.g., 'early exiting', 'stop recording', etc.
+- **trigger**: Open/close left gripper (toggled by pressing button A)
+- **grip (squeeze) button**: Freeze/unfreeze left arm (set by `grip_to_activate` in `XLeRobotYawVRConfig`)
+- **X button**: Quit and move back to the initial position
+- **Y button**: Move back to the zero position
 
 **Right controller**
 
-- **thumbstick**: base motion control, forward / backward / turn left / turn right
-
-- **trigger**: open / close gripper
-
-- **grip (squeeze) button**: freeze / unfreeze left arm (set by `grip_to_activate` in `XLeRobotYawVRConfig`)
-
-- **A button**: toggle trigger state, i.e., open / close gripper
-
-- **B button**: reset the origin pose of both controllers, press this button whenever you relocate / reorientate in space
+- **thumbstick**: Base motion control, e.g., 'forward', 'backward', 'turn left/right'
+- **trigger**: Open/close gripper (toggled by pressing button A)
+- **grip (squeeze) button**: Freeze/unfreeze right arm (set by `grip_to_activate` in `XLeRobotYawVRConfig`)
+- **A button**: Toggle trigger state, i.e., open/close gripper
+- **B button**: Reset the origin pose of both controllers. *Press this button whenever you relocate/reorientate in space*

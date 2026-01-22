@@ -15,15 +15,18 @@ pip install -r requirements.txt
 ### 1. Run vr_monitor.py directly
 
 From the XLeVR directory:
+
 ```bash
 python vr_monitor.py
 ```
+
 - Open your VR headset browser and go to the HTTPS address shown in the terminal (e.g. `https://<your-ip>:8443`).
 - Move your VR controllers; the terminal will print real-time control data.
 
 ### 2. Use vr_monitor.py from another folder
 
 You can copy `vr_monitor.py` to any directory (e.g., your own project folder). Just:
+
 - Make sure the `XLeVR` main directory path is correct (edit the `XLEVR_PATH` variable at the top of the script).
 - Install dependencies as above.
 
@@ -32,6 +35,7 @@ You can copy `vr_monitor.py` to any directory (e.g., your own project folder). J
 The `VRMonitor` class stores the latest control goals (controller/headset data) in `self.left_goal`, `self.right_goal`, and `self.headset_goal`.
 
 Example:
+
 ```python
 monitor = VRMonitor()
 monitor.initialize()
@@ -50,10 +54,12 @@ Each of `self.left_goal`, `self.right_goal`, and `self.headset_goal` is a `Contr
 - `target_position`: 3D position as a numpy array (e.g., `[x, y, z]`).
 - `wrist_roll_deg`: Wrist roll angle in degrees (float, may be None for headset).
 - `wrist_flex_deg`: Wrist flex (pitch) angle in degrees (float, may be None for headset).
+- `wrist_yaw_deg`: Wrist yaw angle in degrees (float, may be None for headset).
 - `gripper_closed`: Boolean, whether the gripper is closed (for controllers).
 - `metadata`: Dictionary with extra info (raw controller data, trigger state, thumbstick, etc).
 
 Example:
+
 ```python
 print(left_goal.arm)              # 'left'
 print(left_goal.target_position)  # numpy array: [x, y, z]
