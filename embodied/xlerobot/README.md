@@ -7,24 +7,18 @@ This repo is based on the XLeRobot [[Link](https://github.com/Vector-Wangel/XLeR
 - Easier ways to set configurations via `TeleoperatorConfig` or CLI
 - **Improved VR control experience** with added keymaps for more actions such as 'back to zero/home', 'exit', and 'reset reference frame' (I found this is very useful when you drive the robot around and still be able to reposition yourself)
 - **Smoothier base movements**. Using the `EMAJointAction` processor, the three-wheeled base now starts off gently and stops pointly
-- (Optional) Support SO101-yaw arm (SO101 + 1 dof wrist yaw) \[[Hardware](https://makerworld.com/en/models/1913316-so101-arm-wrist-yaw-6dof#profileId-2088553)\]
+- (Optional) Support SO101-yaw arm (SO101 + 1 dof wrist yaw) [[Hardware](https://makerworld.com/en/models/1913316-so101-arm-wrist-yaw-6dof#profileId-2088553)]
 
 
 
 ## 2. Installation
 
 > [!IMPORTANT]
-> 
->  Before you start:
-> 
+> Before you start:
 > - Have the physical platform (XLeRobot) ready
-> 
-> - If you want to try XLeRobot-yaw, ensure you have reconfigured motor ids (\[[Bambot]([Feetech Servo Control Panel - feetech.js](https://bambot.org/feetech.js?lang=en))\])...
->   
+> - If you want to try XLeRobot-yaw, ensure you have reconfigured motor ids (using tools from [[Bambot](https://bambot.org/feetech.js?lang=en)])...
 >   - left arm (7 dof) + head (2dof): id 1 to 9
->   
 >   - right arm (7 dof) + base (3 dof): id 1 to 10
-> 
 > - Install the `lerobot`
 
 ### 2.1 Move files
@@ -52,7 +46,7 @@ software/
 You still need to update a few lines of codes.
 
 - In `.../teleoperators/xlerobot_vr/vr_monitor.py` around line 21, set the variable `XLEVR_PATH`.
-
+  
 - In `lerobot/src/lerobot/robots/utils.py` around line 65, add
   
   ```python
