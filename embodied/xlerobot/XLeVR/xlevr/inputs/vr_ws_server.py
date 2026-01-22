@@ -3,9 +3,9 @@ VR WebSocket server for receiving controller data from web browsers.
 Adapted from the original vr_robot_teleop.py script.
 
 Original code: telegrip
-Modified for XLerobotYaw:
+Modified for XLeRobot:
 - add y-axis rotation
-- use absolute local target position
+- use delta position and rotation in local frame
 
 Important functions to look at if you want to modify the code:
 - process_controller_data

@@ -19,7 +19,7 @@ from lerobot.processor import (
 )
 from lerobot.robots.utils import ensure_safe_goal_position
 from lerobot.utils.rotation import Rotation
-from lerobot.robots.xlerobot_yaw import XLeRobotYaw
+from lerobot.robots.xlerobot import XLeRobot
 
 
 @ProcessorStepRegistry.register("analytical_inverse_kinematics_delta_to_joints")
@@ -39,7 +39,7 @@ class AnalyticalInverseKinematicsDeltaToJoints(RobotActionProcessorStep):
     """
     kinematics_left: RRKinematics
     kinematics_right: RRKinematics
-    robot: XLeRobotYaw
+    robot: XLeRobot
     motor_names: list[str]
 
     def __post_init__(self):
@@ -214,6 +214,9 @@ class AnalyticalInverseKinematicsDeltaToJoints(RobotActionProcessorStep):
     def transform_features(
         self, features: dict[PipelineFeatureType, dict[str, PolicyFeature]]
     ) -> dict[PipelineFeatureType, dict[str, PolicyFeature]]:
+        no_left_wrist_yaw = 'left_arm_ee_delta.yaw' not in features[PipelineFeatureType.ACTION]
+        no_right_wrist_yaw = 'right_arm_ee_delta.yaw' not in features[PipelineFeatureType.ACTION]
+        
         for feat in [
             "left_arm_ee_delta.x",
             "left_arm_ee_delta.y",
@@ -255,6 +258,10 @@ class AnalyticalInverseKinematicsDeltaToJoints(RobotActionProcessorStep):
             features[PipelineFeatureType.ACTION][f"{feat}.pos"] = PolicyFeature(
                 type=FeatureType.ACTION, shape=(1,)
             )
+        if no_left_wrist_yaw:
+            features[PipelineFeatureType.ACTION].pop("left_arm_wrist_yaw", None)
+        if no_right_wrist_yaw:
+            features[PipelineFeatureType.ACTION].pop("right_arm_wrist_yaw", None)
         return features
 
 
@@ -267,7 +274,7 @@ class BaseJointAction(RobotActionProcessorStep):
     Attributes:
         robot: The robot instance.
     """
-    robot: XLeRobotYaw
+    robot: XLeRobot
 
     def action(self, action: RobotAction) -> RobotAction:
         base_action = action.pop("base_action")
@@ -295,7 +302,7 @@ class BaseJointAction(RobotActionProcessorStep):
 @ProcessorStepRegistry.register("joint_clip_norm_value")
 @dataclass
 class JointClipNormValue(RobotActionProcessorStep):
-    robot: XLeRobotYaw
+    robot: XLeRobot
 
     def action(self, action: RobotAction) -> RobotAction:
         for k, v in action.items():

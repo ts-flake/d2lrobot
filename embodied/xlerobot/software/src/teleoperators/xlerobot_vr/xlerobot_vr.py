@@ -9,16 +9,16 @@ from typing import Any
 import numpy as np
 
 from ..teleoperator import Teleoperator
-from .config_xlerobot_yaw_vr import XLeRobotYawVRConfig
-from ..xlerobot_vr.vr_monitor import VRMonitor
+from .config_xlerobot_vr import XLeRobotVRConfig
+from .vr_monitor import VRMonitor
 
 logger = logging.getLogger(__name__)
 
-class XLeRobotYawVR(Teleoperator):
-    config_class = XLeRobotYawVRConfig
-    name = "xlerobot_yaw_vr"
+class XLeRobotVR(Teleoperator):
+    config_class = XLeRobotVRConfig
+    name = "xlerobot_vr"
 
-    def __init__(self, config: XLeRobotYawVRConfig):
+    def __init__(self, config: XLeRobotVRConfig):
         super().__init__(config)
         self.config = config
         self.vr_monitor: VRMonitor | None = None
@@ -75,14 +75,12 @@ class XLeRobotYawVR(Teleoperator):
             "left_arm_ee_delta.z": float,
             "left_arm_ee_delta.roll": float,
             "left_arm_ee_delta.pitch": float,
-            "left_arm_ee_delta.yaw": float,
             "left_arm_gripper.pos": float,
             "right_arm_ee_delta.x": float,
             "right_arm_ee_delta.y": float,
             "right_arm_ee_delta.z": float,
             "right_arm_ee_delta.roll": float,
             "right_arm_ee_delta.pitch": float,
-            "right_arm_ee_delta.yaw": float,
             "right_arm_gripper.pos": float,
             "head.pitch": float,
             "head.yaw": float,
@@ -234,7 +232,6 @@ class XLeRobotYawVR(Teleoperator):
             
             droll = goal.wrist_roll_deg
             dpitch = goal.wrist_flex_deg
-            dyaw = goal.wrist_yaw_deg
             if abs(droll) > dead_zones_arm.get('roll', 0.3):
                 droll *= factors_arm.get('roll', 100)
                 _limit = limits_arm.get('ang', 1.0)
@@ -245,11 +242,6 @@ class XLeRobotYawVR(Teleoperator):
                 _limit = limits_arm.get('ang', 1.0)
                 dpitch = np.clip(dpitch, -_limit, _limit)
                 action[f"{prefix}_ee_delta.pitch"] = dpitch
-            if abs(dyaw) > dead_zones_arm.get('yaw', 0.3):
-                dyaw *= factors_arm.get('yaw', 100)
-                _limit = limits_arm.get('ang', 1.0)
-                dyaw = np.clip(dyaw, -_limit, _limit)
-                action[f"{prefix}_ee_delta.yaw"] = dyaw
             
         def _set_action_gripper(goal, prefix):
             if goal.metadata.get('trigger', 0) > 0.5:

@@ -4,9 +4,9 @@ from dataclasses import dataclass, field
 
 from ..config import TeleoperatorConfig
 
-@TeleoperatorConfig.register_subclass("xlerobot_yaw_vr")
+@TeleoperatorConfig.register_subclass("xlerobot_vr")
 @dataclass
-class XLeRobotYawVRConfig(TeleoperatorConfig):
+class XLeRobotVRConfig(TeleoperatorConfig):
     fps: int = 30 # Hz
     console_level: str = 'info' # Logging level
     stepsize: float | dict[str, float] = field(default_factory=lambda: {'ang': 2.0, 'pos': 0.001, 'gripper': 5.0}) # Stepsize
@@ -32,7 +32,6 @@ class XLeRobotYawVRConfig(TeleoperatorConfig):
         'arm': {
             'roll': 0.5,
             'pitch': 0.4,
-            'yaw': 0.2,
             'dx': 0.001,
             'dy': 0.001,
             'dz': 0.001
@@ -48,7 +47,6 @@ class XLeRobotYawVRConfig(TeleoperatorConfig):
         'arm': {
             'roll': 100,
             'pitch': 2,
-            'yaw': 200,
             'dx': 1.5,
             'dy': 1000,
             'dz': 1.5

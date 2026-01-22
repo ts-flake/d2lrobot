@@ -15,7 +15,7 @@ from lerobot.processor.converters import (
     robot_action_observation_to_transition,
     transition_to_robot_action,
 )
-from lerobot.robots.xlerobot_yaw import XLeRobotYaw, XLeRobotYawConfig
+from lerobot.robots.xlerobot import XLeRobot, XLeRobotConfig
 from lerobot.robots.xlerobot.robot_action_processor import (
     AnalyticalInverseKinematicsDeltaToJoints,
     BaseJointAction,
@@ -27,17 +27,17 @@ from lerobot.robots.xlerobot.robot_action_processor import (
 )
 from lerobot.processor import make_default_processors
 from lerobot.robots.xlerobot.utils.action_utils import move_robot_to_position, move_robot_to_zero_position
-from lerobot.teleoperators.xlerobot_yaw_vr import XLeRobotYawVR, XLeRobotYawVRConfig
+from lerobot.teleoperators.xlerobot_vr import XLeRobotVR, XLeRobotVRConfig
 from lerobot.utils.robot_utils import busy_wait
 from lerobot.utils.visualization_utils import init_rerun, log_rerun_data
 from lerobot.scripts.lerobot_record import DatasetRecordConfig, RecordConfig, record_loop
 from lerobot.utils.utils import log_say
-from ..xlerobot.utils import init_color_logging
+from utils import init_color_logging
 
 @dataclass
 class Config:
-    robot: XLeRobotYawConfig
-    teleop: XLeRobotYawVRConfig
+    robot: XLeRobotConfig
+    teleop: XLeRobotVRConfig
     dataset: DatasetRecordConfig
     display_data: bool = False
 
@@ -62,8 +62,8 @@ def main(cfg: Config):
     DISPLAY_DATA = cfg.display_data
 
     # Initialize the robot and teleoperator
-    robot = XLeRobotYaw(robot_config)
-    teleop_device = XLeRobotYawVR(teleop_config)
+    robot = XLeRobot(robot_config)
+    teleop_device = XLeRobotVR(teleop_config)
 
     # Build pipeline to convert vr action to joint action
     vr_to_robot_joints_processor = RobotProcessorPipeline[tuple[RobotAction, RobotObservation], RobotAction](
@@ -118,7 +118,7 @@ def main(cfg: Config):
     teleop_device.connect()
 
     # Init rerun viewer
-    init_rerun(session_name="xlerobot_yaw_teleop_vr")
+    init_rerun(session_name="xlerobot_record_vr")
 
     if not robot.is_connected:
         logger.error("❌ Robot is not connected!")

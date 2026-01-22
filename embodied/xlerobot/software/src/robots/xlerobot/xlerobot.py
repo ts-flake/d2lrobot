@@ -17,16 +17,15 @@ from lerobot.motors.feetech import (
 )
 from ..robot import Robot
 from ..utils import ensure_safe_goal_position
-from .config_xlerobot_yaw import XLeRobotYawConfig
+from .config_xlerobot import XLeRobotConfig
 
 logger = logging.getLogger(__name__)
 
 
-class XLeRobotYaw(Robot):
+class XLeRobot(Robot):
     """
-    XLeRobotYaw 基于 XLeRobot V0.3 改装.
-    原始的 XLeRobot 包含一个移动底盘 (3 omniwheels) 和两个 SO101 机械臂.
-    (新增) 改装后的机械臂 SO101Yaw 多加一个 wrist yaw 关节, 一共 6+1 DoFs.
+    原始的 XLeRobot V0.3.包含一个移动底盘 (3 omniwheels) 和两个 SO101 机械臂.
+    Origianl XLeRobot V0.3, including a mobile base (3 omniwheels) and two SO101 arms.
 
     *注意*: 默认电机旋转顺时针为正.
     Note: The default motor rotation is clockwise.
@@ -52,13 +51,13 @@ class XLeRobotYaw(Robot):
     - y: left direction
     - z: follows the right-hand rule
 
-    底盘:
+    底盘 (Base):
     - x: forward direction
     - y: left direction
     - z: follows the right-hand rule
     """
-    config_class = XLeRobotYawConfig
-    name = "xlerobot_yaw"
+    config_class = XLeRobotConfig
+    name = "xlerobot"
 
     # Chassis parameters
     _wheel_radius: float = 0.05
@@ -66,7 +65,7 @@ class XLeRobotYaw(Robot):
     _wheel_max_raw: int = 3000
     _wheel_mounting_angles: list[float] = [240, 0, 120] # left, back, right in clockwise order, in degrees
 
-    def __init__(self, config: XLeRobotYawConfig):
+    def __init__(self, config: XLeRobotConfig):
         super().__init__(config)
         self.config = config
         self.teleop_keys = config.teleop_keys
@@ -91,7 +90,6 @@ class XLeRobotYaw(Robot):
                 "left_arm_shoulder_lift": self.calibration.get("left_arm_shoulder_lift"),
                 "left_arm_elbow_flex": self.calibration.get("left_arm_elbow_flex"), 
                 "left_arm_wrist_flex": self.calibration.get("left_arm_wrist_flex"),
-                "left_arm_wrist_yaw": self.calibration.get("left_arm_wrist_yaw"),  # 新增的关节
                 "left_arm_wrist_roll": self.calibration.get("left_arm_wrist_roll"),
                 "left_arm_gripper": self.calibration.get("left_arm_gripper"),
                 "head_yaw": self.calibration.get("head_yaw"),
@@ -107,12 +105,11 @@ class XLeRobotYaw(Robot):
                 "left_arm_shoulder_lift": Motor(2, "sts3215", norm_mode_body),
                 "left_arm_elbow_flex": Motor(3, "sts3215", norm_mode_body),
                 "left_arm_wrist_flex": Motor(4, "sts3215", norm_mode_body),
-                "left_arm_wrist_yaw": Motor(5, "sts3215", norm_mode_body),  # 新增的关节
-                "left_arm_wrist_roll": Motor(6, "sts3215", norm_mode_body),
-                "left_arm_gripper": Motor(7, "sts3215", MotorNormMode.RANGE_0_100),
+                "left_arm_wrist_roll": Motor(5, "sts3215", norm_mode_body),
+                "left_arm_gripper": Motor(6, "sts3215", MotorNormMode.RANGE_0_100),
                 # head
-                "head_yaw": Motor(8, "sts3215", norm_mode_body),  # 相机 yaw
-                "head_pitch": Motor(9, "sts3215", norm_mode_body),  # 相机 pitch
+                "head_yaw": Motor(7, "sts3215", norm_mode_body),  # camera yaw
+                "head_pitch": Motor(8, "sts3215", norm_mode_body),  # camera pitch
             },
             calibration= calibration1,
         )
@@ -123,7 +120,6 @@ class XLeRobotYaw(Robot):
                 "right_arm_shoulder_lift": self.calibration.get("right_arm_shoulder_lift"),
                 "right_arm_elbow_flex": self.calibration.get("right_arm_elbow_flex"),
                 "right_arm_wrist_flex": self.calibration.get("right_arm_wrist_flex"),
-                "right_arm_wrist_yaw": self.calibration.get("right_arm_wrist_yaw"),  # 新增的关节
                 "right_arm_wrist_roll": self.calibration.get("right_arm_wrist_roll"),
                 "right_arm_gripper": self.calibration.get("right_arm_gripper"),
                 "base_left_wheel": self.calibration.get("base_left_wheel"),
@@ -140,13 +136,12 @@ class XLeRobotYaw(Robot):
                 "right_arm_shoulder_lift": Motor(2, "sts3215", norm_mode_body),
                 "right_arm_elbow_flex": Motor(3, "sts3215", norm_mode_body),
                 "right_arm_wrist_flex": Motor(4, "sts3215", norm_mode_body),
-                "right_arm_wrist_yaw": Motor(5, "sts3215", norm_mode_body),
-                "right_arm_wrist_roll": Motor(6, "sts3215", norm_mode_body),  # 新增的关节
-                "right_arm_gripper": Motor(7, "sts3215", MotorNormMode.RANGE_0_100),
+                "right_arm_wrist_roll": Motor(5, "sts3215", norm_mode_body),
+                "right_arm_gripper": Motor(6, "sts3215", MotorNormMode.RANGE_0_100),
                 # base
-                "base_left_wheel": Motor(8, "sts3215", MotorNormMode.RANGE_M100_100),
-                "base_back_wheel": Motor(9, "sts3215", MotorNormMode.RANGE_M100_100),
-                "base_right_wheel": Motor(10, "sts3215", MotorNormMode.RANGE_M100_100),
+                "base_left_wheel": Motor(7, "sts3215", MotorNormMode.RANGE_M100_100),
+                "base_back_wheel": Motor(8, "sts3215", MotorNormMode.RANGE_M100_100),
+                "base_right_wheel": Motor(9, "sts3215", MotorNormMode.RANGE_M100_100),
             },
             calibration=calibration2,
         )
@@ -173,14 +168,12 @@ class XLeRobotYaw(Robot):
                 "left_arm_shoulder_lift.pos",
                 "left_arm_elbow_flex.pos",
                 "left_arm_wrist_flex.pos",
-                "left_arm_wrist_yaw.pos",  # 新增的关节
                 "left_arm_wrist_roll.pos",
                 "left_arm_gripper.pos",
                 "right_arm_shoulder_pan.pos",
                 "right_arm_shoulder_lift.pos",
                 "right_arm_elbow_flex.pos",
                 "right_arm_wrist_flex.pos",
-                "right_arm_wrist_yaw.pos",  # 新增的关节
                 "right_arm_wrist_roll.pos",
                 "right_arm_gripper.pos",
                 "head_yaw.pos",
