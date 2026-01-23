@@ -90,8 +90,8 @@ class AnalyticalInverseKinematicsDeltaToJoints(RobotActionProcessorStep):
             q_dict["right_arm_wrist_roll"] -= droll_right
         
         # Wrist yaw (direct control)
-        dyaw_left = action.pop("left_arm_ee_delta.yaw")
-        dyaw_right = action.pop("right_arm_ee_delta.yaw")
+        dyaw_left = action.pop("left_arm_ee_delta.yaw", None)
+        dyaw_right = action.pop("right_arm_ee_delta.yaw", None)
         if dyaw_left is not None and q_dict.get("left_arm_wrist_yaw") is not None:
             q_dict["left_arm_wrist_yaw"] -= dyaw_left
         if dyaw_right is not None and q_dict.get("right_arm_wrist_yaw") is not None:
