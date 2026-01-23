@@ -46,7 +46,6 @@ software/
 You still need to update a few lines of codes.
 
 - In `.../teleoperators/xlerobot_vr/vr_monitor.py` around line 21, set the variable `XLEVR_PATH`.
-  
 - In `lerobot/src/lerobot/robots/utils.py` around line 65, add
   
   ```python
@@ -77,6 +76,7 @@ To teleoperate XLeRobot using a VR (Quest3), go to `lerobot/examples/xlerobot` a
 python teleoperate_vr.py \
 --robot.id [your_robot_name] \
 --teleop.fps 30 \
+--teleop.grip_to_activate true \
 --display_data true
 ```
 
@@ -86,6 +86,7 @@ To record dataset, go to `lerobot/examples/xlerobot` and run:
 python record_vr.py \
 --robot.id [your_robot_name] \
 --teleop.fps 30 \
+--teleop.grip_to_activate true \
 --teleop.record_dataset true \
 --dataset.repo_id [user/folder] \
 --dataset.single_task [task_name] \
@@ -99,8 +100,8 @@ python record_vr.py \
 The full list of parameters can be found in...
 
 - `.../robots/xlerobot/config_xlerobot.py`
-
 - `.../teleoperators/xlerobot_vr/config_xlerobot_vr.py`
+- `lerobot/src/lerobot/scripts/lerobot_record.py:line142`
 
 
 
@@ -117,14 +118,11 @@ The `wrist_yaw_deg` is a newly added field to `ControlGoal` for the SO101-yaw (o
 Significant changes to `XLeVR/xlevr/inputs/vr_ws_server.py`:
 
 - `VRControllerState` now records the prev/curr-position/quaternion to facilitate delta position/quaternion computation
-
 - `VRWebSocketServer` sends **delta EE** commands, in the **robot's frame**, i.e., forward (x), left (y), upward (z):
-  
   - `target_position`: (dx, dy, dz)
   - `wrist_roll_deg`: x-axis rotation (angle directions follow the right-hand rule)
   - `wrist_flex_deg`: pitch, y-axis rotation
   - `wrist_yaw_deg`: z-axis rotation
-
 - The **original squeeze-to-teleoperate logic is pushed to downstreams**, and all necessary information is stored in `metadata`. E.g., the user can decide the behavior of the controller when `metadata['buttons']['squeeze']` is true.
   
   > ***Note:*** In the codes, the delta actions are expressed in the local/body frame (`origin_quaternion`) first and then converted to the robot's frame.
