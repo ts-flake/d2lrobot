@@ -7,14 +7,14 @@ This repo is based on the XLeRobot [[Link](https://github.com/Vector-Wangel/XLeR
 - Easier ways to set configurations via `TeleoperatorConfig` or CLI
 - **Improved VR control experience** with added keymaps for more actions such as 'back to zero/home', 'exit', and 'reset reference frame' (I found this is very useful when you drive the robot around and still be able to reposition yourself)
 - **Smoothier base movements**. Using the `EMAJointAction` processor, the three-wheeled base now starts off gently and stops pointly
+- **Easier and unified keymap definitions** for different gamepads, see details in `.../teleoperators/xlerobot_gamepad/gamepad_utils.py`
 - (Optional) Support SO101-yaw arm (SO101 + 1 dof wrist yaw) [[Hardware](https://makerworld.com/en/models/1913316-so101-arm-wrist-yaw-6dof#profileId-2088553)]
-
-
 
 ## 2. Installation
 
 > [!IMPORTANT]
 > Before you start:
+> 
 > - Have the physical platform (XLeRobot) ready
 > - If you want to try XLeRobot-yaw, ensure you have reconfigured motor ids (using tools from [[Bambot](https://bambot.org/feetech.js?lang=en)])...
 >   - left arm (7 dof) + head (2dof): id 1 to 9
@@ -38,7 +38,8 @@ software/
     │   └── xlerobot_yaw/
     └── teleoperators/      --> move to lerobot/src/lerobot/teleoperators
         ├── xlerobot_vr/
-        └── xlerobot_yaw_vr/
+        ├── xlerobot_yaw_vr/
+        └── ...
 ```
 
 ### 2.2 Modifiy codes
@@ -46,6 +47,7 @@ software/
 You still need to update a few lines of codes.
 
 - In `.../teleoperators/xlerobot_vr/vr_monitor.py` around line 21, set the variable `XLEVR_PATH`.
+
 - In `lerobot/src/lerobot/robots/utils.py` around line 65, add
   
   ```python
@@ -66,6 +68,12 @@ You still need to update a few lines of codes.
   elif config.type == "xlerobot_yaw_vr":
       from .xlerobot_yaw_vr import XLeRobotYawVR
       return XLeRobotYawVR(config)
+  elif config.type == "xlerobot_gamepad":
+      from .xlerobot_gamepad import XLeRobotGamepad
+      return XLeRobotGamepad(config)
+  elif config.type == "xlerobot_yaw_gamepad":
+      from .xlerobot_yaw_gamepad import XLeRobotYawGamepad
+      return XLeRobotYawGamepad(config)
   ```
 
 ## 3. Usages
@@ -95,15 +103,15 @@ python record_vr.py \
 --display_data true
 ```
 
+Other mode of teleoperation, e.g., gamepad, can be done in the same way.
 
 
-The full list of parameters can be found in...
+
+The full list of parameters can be found in (for examples)...
 
 - `.../robots/xlerobot/config_xlerobot.py`
 - `.../teleoperators/xlerobot_vr/config_xlerobot_vr.py`
 - `lerobot/src/lerobot/scripts/lerobot_record.py:line142`
-
-
 
 ## 4. Changes
 
@@ -118,11 +126,14 @@ The `wrist_yaw_deg` is a newly added field to `ControlGoal` for the SO101-yaw (o
 Significant changes to `XLeVR/xlevr/inputs/vr_ws_server.py`:
 
 - `VRControllerState` now records the prev/curr-position/quaternion to facilitate delta position/quaternion computation
+
 - `VRWebSocketServer` sends **delta EE** commands, in the **robot's frame**, i.e., forward (x), left (y), upward (z):
+  
   - `target_position`: (dx, dy, dz)
   - `wrist_roll_deg`: x-axis rotation (angle directions follow the right-hand rule)
   - `wrist_flex_deg`: pitch, y-axis rotation
   - `wrist_yaw_deg`: z-axis rotation
+
 - The **original squeeze-to-teleoperate logic is pushed to downstreams**, and all necessary information is stored in `metadata`. E.g., the user can decide the behavior of the controller when `metadata['buttons']['squeeze']` is true.
   
   > ***Note:*** In the codes, the delta actions are expressed in the local/body frame (`origin_quaternion`) first and then converted to the robot's frame.

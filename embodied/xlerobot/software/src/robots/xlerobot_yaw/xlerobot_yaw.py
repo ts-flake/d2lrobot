@@ -10,6 +10,7 @@ import numpy as np
 
 from lerobot.cameras.utils import make_cameras_from_configs
 from lerobot.utils.errors import DeviceAlreadyConnectedError, DeviceNotConnectedError
+from lerobot.utils.utils import log_say
 from lerobot.motors import Motor, MotorCalibration, MotorNormMode
 from lerobot.motors.feetech import (
     FeetechMotorsBus,
@@ -163,7 +164,9 @@ class XLeRobotYaw(Robot):
         return self._base_speed_index
     
     def set_base_speed_index(self, value: int) -> None:
-        self._base_speed_index = max(0, min(int(value), len(self.base_speed_levels) - 1))
+        value = int(value) % len(self.base_speed_levels)
+        self._base_speed_index = value
+        log_say(f"Base speed index set to {value}")
     
     @property
     def _state_ft(self) -> dict[str, type]:
