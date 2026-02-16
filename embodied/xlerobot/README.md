@@ -7,7 +7,7 @@ This repo is based on the XLeRobot [[Link](https://github.com/Vector-Wangel/XLeR
 - Easier ways to set configurations via `TeleoperatorConfig` or CLI
 - **Improved VR control experience** with added keymaps for more actions such as 'back to zero/home', 'exit', and 'reset reference frame' (I found this is very useful when you drive the robot around and still be able to reposition yourself)
 - **Smoothier base movements**. Using the `EMAJointAction` processor, the three-wheeled base now starts off gently and stops pointly
-- **Easier and unified keymap definitions** for different gamepads, see details in `.../teleoperators/xlerobot_gamepad/gamepad_utils.py`
+- (New) **Easier and unified keymap definitions** for different gamepads, see details in `.../teleoperators/xlerobot_gamepad/gamepad_utils.py`
 - (Optional) Support SO101-yaw arm (SO101 + 1 dof wrist yaw) [[Hardware](https://makerworld.com/en/models/1913316-so101-arm-wrist-yaw-6dof#profileId-2088553)]
 
 ## 2. Installation
