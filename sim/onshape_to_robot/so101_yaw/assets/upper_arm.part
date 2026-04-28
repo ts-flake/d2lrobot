@@ -1,0 +1,14 @@
+{
+    "configuration": "default",
+    "documentId": "6df169d6061f7b8069b6ae2d",
+    "documentMicroversion": "da6cee836c03804bcb4f1273",
+    "documentVersion": "8436f7c5de8cc45d5371be26",
+    "elementId": "bbd864b81ce6431045f0bf6b",
+    "fullConfiguration": "default",
+    "id": "MtzAzaWQQibZWFMWK",
+    "isStandardContent": false,
+    "name": "upper_arm <1>",
+    "partId": "JFD",
+    "suppressed": false,
+    "type": "Part"
+}
