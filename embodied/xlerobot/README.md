@@ -1,7 +1,7 @@
 > [!WARNING]
 > **This repo is archived and no longer maintained.**
 >
-> Active development has moved to **[lerobot-xlerobot](https://github.com/ts-flake/lerobot-xlerobot)** — please use the **[`dev` branch](https://github.com/ts-flake/lerobot-xlerobot/tree/dev)** for the latest code, fixes, and features (under the same `examples/xlerobot_yaw` path). The content below is kept for reference only.
+> Active development has moved to **[lerobot-xlerobot](https://github.com/ts-flake/lerobot-xlerobot)** — please use the **[`xlerobot` branch](https://github.com/ts-flake/lerobot-xlerobot/tree/xlerobot)** for the latest code, fixes, and features (under the same `examples/xlerobot_yaw` path). The content below is kept for reference only.
 
 ## 1. Introduction
 
