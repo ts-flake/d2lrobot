@@ -10,21 +10,26 @@ scene = gs.Scene(
 
 plane = scene.add_entity(gs.morphs.Plane())
 
+# robot = scene.add_entity(
+# 	gs.morphs.URDF(
+# 		file='/home/dhan/Desktop/study/d2lrobot/sim/onshape_to_robot/so101_yaw/robot.urdf',
+# 		fixed=True
+# 	)
+# )
+
 robot = scene.add_entity(
-	gs.morphs.URDF(
-		file='/home/dhan/Desktop/study/d2lrobot/sim/onshape_to_robot/so101_yaw/robot.urdf',
-		fixed=True
+	gs.morphs.MJCF(
+		file='newton_cradle_mj.xml'
 	)
 )
-
 scene.build()
 
-jnt_names = [f'joint{i}' for i in range(1,8)]
-dofs_idx = [robot.get_joint(n).dof_idx_local for n in jnt_names]
+# jnt_names = [f'joint{i}' for i in range(1,8)]
+# dofs_idx = [robot.get_joint(n).dof_idx_local for n in jnt_names]
 
 for i in range(10000):
-	robot.control_dofs_position(
-		np.array([np.sin(0.01*i), 0, 0, 0, 0, 0, 0,]),
-		dofs_idx
-	)
+	# robot.control_dofs_position(
+	# 	np.array([np.sin(0.01*i), 0, 0, 0, 0, 0, 0,]),
+	# 	dofs_idx
+	# )
 	scene.step()
