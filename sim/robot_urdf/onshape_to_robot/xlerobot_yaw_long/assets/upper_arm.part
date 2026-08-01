@@ -1,0 +1,14 @@
+{
+    "configuration": "default",
+    "documentId": "769c8c3693ac0be4e947597b",
+    "documentMicroversion": "0fe1cda3997f55f6c4663213",
+    "documentVersion": "c901772c84eaa8b4343e289b",
+    "elementId": "d4a974aff08a1ce4e00976af",
+    "fullConfiguration": "default",
+    "id": "M2JT3VcfSfg7WKFG2",
+    "isStandardContent": false,
+    "name": "upper_arm <1>",
+    "partId": "JHH",
+    "suppressed": false,
+    "type": "Part"
+}

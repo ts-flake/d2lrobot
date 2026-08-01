@@ -1,0 +1,14 @@
+{
+    "configuration": "default",
+    "documentId": "6f03dd39e64e0a9515782079",
+    "documentMicroversion": "dbc509ab068431cee19ed446",
+    "documentVersion": "f76fc4549acd1fee848af4a6",
+    "elementId": "a20ae060e12766f77106e6f5",
+    "fullConfiguration": "default",
+    "id": "MZY8tSyMW/CSPQMEE",
+    "isStandardContent": false,
+    "name": "wrist_yaw_front <2>",
+    "partId": "JHD",
+    "suppressed": false,
+    "type": "Part"
+}

@@ -1,0 +1,14 @@
+{
+    "configuration": "default",
+    "documentId": "6a026eba473110649ecc9761",
+    "documentMicroversion": "6f31e27c49456dced5596224",
+    "documentVersion": "2842d5d217cc49fa5df7e971",
+    "elementId": "3d1a100a53781d1ecad87885",
+    "fullConfiguration": "default",
+    "id": "Mu91vxCQBLXJ2iJ9X",
+    "isStandardContent": false,
+    "name": "gripper_jaw <1>",
+    "partId": "JFD",
+    "suppressed": false,
+    "type": "Part"
+}

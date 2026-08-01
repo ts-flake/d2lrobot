@@ -1,0 +1,20 @@
+{
+    // Onshape URL of the assembly
+    "url": "https://cad.onshape.com/documents/4b445f2c581c716e4bbe4e7a/w/73129f53501352de095b0648/e/d1367581012e9339a3e06dec",
+    // Output format
+    "output_format": "urdf",
+    "no_collision_meshes": false,
+    "convex_decomposition": true,
+    
+    "ignore": {
+      "*": "collision",
+      "!gripper_*": "collision"
+    },
+    
+    "joint_properties": {
+    	"*": {
+    	  "max_effort": 33,
+    	  "max_velocity": 5
+    	}
+    }
+}

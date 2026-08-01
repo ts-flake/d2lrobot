@@ -1,0 +1,14 @@
+{
+    "configuration": "default",
+    "documentId": "6f03dd39e64e0a9515782079",
+    "documentMicroversion": "dbc509ab068431cee19ed446",
+    "documentVersion": "f76fc4549acd1fee848af4a6",
+    "elementId": "4e0e05483fee14c6460aa0bc",
+    "fullConfiguration": "default",
+    "id": "M6+Qb77YSM+WL10AQ",
+    "isStandardContent": false,
+    "name": "wrist_yaw_back <2>",
+    "partId": "JHD",
+    "suppressed": false,
+    "type": "Part"
+}

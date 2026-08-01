@@ -1,0 +1,13 @@
+{
+    "configuration": "default",
+    "documentId": "5c7655f7a10be258b255653e",
+    "documentMicroversion": "552594b78b25de7bae6a90aa",
+    "elementId": "f57f614031107f48ac635c95",
+    "fullConfiguration": "default",
+    "id": "MDsA+ioWQvsTKi0Mw",
+    "isStandardContent": false,
+    "name": "wrist_yaw_back <1>",
+    "partId": "JHD",
+    "suppressed": false,
+    "type": "Part"
+}

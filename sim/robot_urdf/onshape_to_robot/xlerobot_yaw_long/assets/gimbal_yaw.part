@@ -1,0 +1,14 @@
+{
+    "configuration": "default",
+    "documentId": "6e1ae85a50b00dab85c6baa0",
+    "documentMicroversion": "2be5c5e8e6a9d5672963ae17",
+    "documentVersion": "14c976964904f5e4998ec436",
+    "elementId": "cb3e2f7e52b2482118d15634",
+    "fullConfiguration": "default",
+    "id": "MuBjJxrbtCIxq1Mtg",
+    "isStandardContent": false,
+    "name": "gimbal_yaw <1>",
+    "partId": "JFf",
+    "suppressed": false,
+    "type": "Part"
+}

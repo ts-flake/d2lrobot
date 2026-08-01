@@ -1,0 +1,507 @@
+<?xml version="1.0"?>
+<robot name="so101_yaw_long">
+
+  <link name="base">
+    <visual>
+      <origin xyz="-0.0139647 0.00025 0.0467" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/assets/sts3215.stl" />
+      </geometry>
+      <material name="sts3215_material">
+        <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="-0.0317758 -0.0000994 0.0387" rpy="1.5708 0 1.5708" />
+      <geometry>
+        <mesh filename="meshes/assets/base_motor_holder.stl" />
+      </geometry>
+      <material name="base_motor_holder_material">
+        <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="-0.0463647 0 0.0006" rpy="1.5708 0 1.5708" />
+      <geometry>
+        <mesh filename="meshes/assets/base.stl" />
+      </geometry>
+      <material name="base_material">
+        <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.02 0 0.01" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.11 0.02" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.038 0 0.047" rpy="0 0 0" />
+      <geometry>
+        <box size="0.065 0.05 0.054" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.0254086 0.0000454 0.034686" rpy="0 0 0" />
+      <mass value="0.151" />
+      <inertia ixx="0.0001269" ixy="0" ixz="0" iyy="0.0001357" iyz="0" izz="0.0001324" />
+    </inertial>
+  </link>
+
+  <link name="base_rotation">
+    <visual>
+      <origin xyz="0.0328847 0.0000992 -0.01" rpy="-3.14159 0 0" />
+      <geometry>
+        <mesh filename="meshes/assets/arm_motor_holder.stl" />
+      </geometry>
+      <material name="arm_motor_holder_material">
+        <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.0181" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="meshes/assets/base_rotation.stl" />
+      </geometry>
+      <material name="base_rotation_material">
+        <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.0306 -0.0004 -0.0417" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="meshes/assets/sts3215.stl" />
+      </geometry>
+      <material name="sts3215_2_material">
+        <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.036 0 0.0023" rpy="1.5708 1.5708 0" />
+      <geometry>
+        <box size="0.0754 0.0248 0.0396" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.033 0 -0.024137" rpy="0 0 0" />
+      <geometry>
+        <box size="0.037 0.054 0.03" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0309888 0.0000541 -0.0231919" rpy="0 0 0" />
+      <mass value="0.102" />
+      <inertia ixx="0.0000903" ixy="0.0000001" ixz="0.0000015" iyy="0.0000881" iyz="-0.0000001" izz="0.0000251" />
+    </inertial>
+  </link>
+
+  <link name="upper_arm">
+    <visual>
+      <origin xyz="0.16257 0.0155 0.0187" rpy="-3.14159 0 1.5708" />
+      <geometry>
+        <mesh filename="meshes/assets/sts3215.stl" />
+      </geometry>
+      <material name="sts3215_3_material">
+        <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.065085 -0.012 0.0182" rpy="3.14159 0 -3.14159" />
+      <geometry>
+        <mesh filename="meshes/assets/upper_arm.stl" />
+      </geometry>
+      <material name="upper_arm_material">
+        <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.035 0 0.018" rpy="-3.14159 0 3.14159" />
+      <geometry>
+        <box size="0.08 0.028 0.065" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.125 0 0.018" rpy="-3.14159 0 3.14159" />
+      <geometry>
+        <box size="0.112 0.028 0.052" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.123791 0.0077401 0.0183926" rpy="0 0 0" />
+      <mass value="0.106" />
+      <inertia ixx="0.0000416" ixy="-0.0000321" ixz="-0.0000001" iyy="0.00032" iyz="0" izz="0.0003143" />
+    </inertial>
+  </link>
+
+  <link name="under_arm">
+    <visual>
+      <origin xyz="0.0698937 0.012 0.0180425" rpy="-1.5708 0 3.14159" />
+      <geometry>
+        <mesh filename="meshes/assets/under_arm.stl" />
+      </geometry>
+      <material name="under_arm_material">
+        <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.1674 -0.0052 0.0187" rpy="3.14159 0 0" />
+      <geometry>
+        <mesh filename="meshes/assets/sts3215.stl" />
+      </geometry>
+      <material name="sts3215_4_material">
+        <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.1357 -0.0029153 0.0181008" rpy="1.5708 0 1.5708" />
+      <geometry>
+        <mesh filename="meshes/assets/wrist_motor_holder.stl" />
+      </geometry>
+      <material name="wrist_motor_holder_material">
+        <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.07 0 0.018" rpy="-1.5708 0 0" />
+      <geometry>
+        <box size="0.15 0.062 0.025" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.15 -0.0031 0.018" rpy="-1.5708 0 0" />
+      <geometry>
+        <box size="0.03 0.053 0.037" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.131353 -0.0030592 0.018284" rpy="0 0 0" />
+      <mass value="0.11" />
+      <inertia ixx="0.0000319" ixy="0.0000111" ixz="-0.0000015" iyy="0.0003055" iyz="0" izz="0.0002892" />
+    </inertial>
+  </link>
+
+  <link name="wrist_yaw_back">
+    <visual>
+      <origin xyz="0 0 0.0183" rpy="-1.5708 0 -3.14159" />
+      <geometry>
+        <mesh filename="meshes/assets/wrist_yaw_back.stl" />
+      </geometry>
+      <material name="wrist_yaw_back_material">
+        <color rgba="0.75686300 0.18039200 0.12156900 1.00000000"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.02614 -0.01245 0.0199887" rpy="-1.5708 0 -3.14159" />
+      <geometry>
+        <cylinder radius="0.015" length="0.045" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.002 -0.0013 0.018" rpy="0 0 -3.14159" />
+      <geometry>
+        <cylinder radius="0.012358" length="0.055" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0170191 -0.0096399 0.0183001" rpy="0 0 0" />
+      <mass value="0.02" />
+      <inertia ixx="0.0000084" ixy="0.0000014" ixz="0" iyy="0.0000067" iyz="0" izz="0.0000066" />
+    </inertial>
+  </link>
+
+  <link name="wrist_yaw_front">
+    <visual>
+      <origin xyz="-0.0125 0 -0.0187" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/assets/sts3215.stl" />
+      </geometry>
+      <material name="sts3215_5_material">
+        <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="-0.0428 0 0.025043" rpy="0 -1.5708 0" />
+      <geometry>
+        <mesh filename="meshes/assets/sts3215.stl" />
+      </geometry>
+      <material name="sts3215_6_material">
+        <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="-0.0283 0 0.0037965" rpy="-3.14159 0 -3.14159" />
+      <geometry>
+        <mesh filename="meshes/assets/wrist_yaw_front.stl" />
+      </geometry>
+      <material name="wrist_yaw_front_material">
+        <color rgba="0.75686300 0.18039200 0.12156900 1.00000000"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.042 0 0.025043" rpy="0 -1.5708 0" />
+      <geometry>
+        <box size="0.05 0.033 0.04" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.016 0 -0.022" rpy="0 -1.5708 0" />
+      <geometry>
+        <box size="0.035 0.03 0.045" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.0288469 0.0000321 0.0031855" rpy="0 0 0" />
+      <mass value="0.14" />
+      <inertia ixx="0.0000923" ixy="0" ixz="0.0000354" iyy="0.0001291" iyz="0" izz="0.0000551" />
+    </inertial>
+  </link>
+
+  <link name="gripper_fixed">
+    <visual>
+      <origin xyz="-0.0000008 0.0002182 0.0009497" rpy="3.14159 0 -3.13794" />
+      <geometry>
+        <mesh filename="meshes/assets/gripper_fixed.stl" />
+      </geometry>
+      <material name="gripper_fixed_material">
+        <color rgba="0.96470600 0.96470600 0.95294100 1.00000000"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="-0.0077003 0.0000719 -0.0234" rpy="-1.5708 0 -3.13794" />
+      <geometry>
+        <mesh filename="meshes/assets/sts3215.stl" />
+      </geometry>
+      <material name="sts3215_7_material">
+        <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.025 0 -0.025" rpy="-3.14159 0 3.14159" />
+      <geometry>
+        <box size="0.02 0.033 0.04" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0.0002182 0.0009497" rpy="-3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="meshes/assets/convex_decomposition/gripper_fixed_00002.stl" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0055 0 -0.022" rpy="-3.14159 0 3.14159" />
+      <geometry>
+        <box size="0.05 0.045 0.026" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.003 -0.045 0" rpy="-2.3910984 0 3.14159" />
+      <geometry>
+        <box size="0.035 0.035 0.0055" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.003 -0.07 0.005" rpy="-3.5430157 0 3.14159" />
+      <geometry>
+        <box size="0.035 0.035 0.005" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0003717 -0.0001174 -0.0253324" rpy="0 0 0" />
+      <mass value="0.086" />
+      <inertia ixx="0.0000284" ixy="-0.0000003" ixz="0.000006" iyy="0.0000444" iyz="0.0000001" izz="0.0000347" />
+    </inertial>
+  </link>
+
+  <link name="gripper_center">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+  </link>
+
+  <link name="gripper_back">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+  </link>
+
+  <link name="camera_mount">
+    <visual>
+      <origin xyz="0.00815 -0.0181 0" rpy="-1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="meshes/assets/wrist_camera_mount.stl" />
+      </geometry>
+      <material name="wrist_camera_mount_material">
+        <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
+      </material>
+    </visual>
+    <inertial>
+      <origin xyz="-0.0224746 -0.0010229 -0.0255423" rpy="0 0 0" />
+      <mass value="0.012" />
+      <inertia ixx="0.0000055" ixy="0.0000001" ixz="-0.0000013" iyy="0.0000053" iyz="0.0000001" izz="0.0000023" />
+    </inertial>
+  </link>
+
+  <link name="camera_body">
+    <visual>
+      <origin xyz="0 -0.0495931 -0.0007953" rpy="1.5708 0 1.5708" />
+      <geometry>
+        <mesh filename="meshes/assets/camera_uvc_25x32.stl" />
+      </geometry>
+      <material name="camera_uvc_25x32_material">
+        <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
+      </material>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+  </link>
+
+  <link name="camera_optical">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+  </link>
+
+  <link name="gripper_jaw">
+    <visual>
+      <origin xyz="0.0009444 0.0004902 0.0189" rpy="0 0 -0.0004102" />
+      <geometry>
+        <mesh filename="meshes/assets/gripper_jaw.stl" />
+      </geometry>
+      <material name="gripper_jaw_material">
+        <color rgba="0.96470600 0.96470600 0.95294100 1.00000000"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/assets/convex_decomposition/gripper_jaw_00006.stl" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/assets/convex_decomposition/gripper_jaw_00009.stl" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/assets/convex_decomposition/gripper_jaw_00012.stl" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/assets/convex_decomposition/gripper_jaw_00013.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.0006429 -0.0295336 0.0192755" rpy="0 0 0" />
+      <mass value="0.013" />
+      <inertia ixx="0.0000072" ixy="-0.0000003" ixz="0" iyy="0.000002" iyz="-0.0000001" izz="0.0000057" />
+    </inertial>
+  </link>
+
+  <joint name="gripper_center_frame" type="fixed">
+    <parent link="gripper_fixed" />
+    <child link="gripper_center" />
+    <origin xyz="0 0 -0.064" rpy="1.56714 1.5708 0" />
+  </joint>
+
+  <joint name="gripper_back_frame" type="fixed">
+    <parent link="gripper_fixed" />
+    <child link="gripper_back" />
+    <origin xyz="0 0 -0.009" rpy="1.56714 1.5708 0" />
+  </joint>
+
+  <joint name="camera_optical_frame" type="fixed">
+    <parent link="camera_body" />
+    <child link="camera_optical" />
+    <origin xyz="0.0134 0.0002035 -0.0003977" rpy="0 0 0" />
+  </joint>
+
+  <joint name="camera" type="fixed">
+    <parent link="camera_mount" />
+    <child link="camera_body" />
+    <origin xyz="-0.0299654 -0.0006 -0.0493488" rpy="3.14159 -0.436332 0" />
+  </joint>
+
+  <joint name="camera_mount" type="fixed">
+    <parent link="gripper_fixed" />
+    <child link="camera_mount" />
+    <origin xyz="-0.0030123 -0.0240112 -0.0234002" rpy="-1.57445 1.5708 0" />
+  </joint>
+
+  <joint name="joint7" type="revolute">
+    <parent link="gripper_fixed" />
+    <child link="gripper_jaw" />
+    <origin xyz="-0.0201319 -0.0186736 -0.0234" rpy="1.5708 0 -3.13794" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.174123" upper="1.74574" effort="30" velocity="5" />
+    <dynamics damping="0.6" friction="0.025" />
+  </joint>
+
+  <joint name="joint6" type="revolute">
+    <parent link="wrist_yaw_front" />
+    <child link="gripper_fixed" />
+    <origin xyz="-0.0615 0 0.037543" rpy="-3.14159 -1.5708 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="-2.97071" upper="2.85869" effort="30" velocity="5" />
+    <dynamics damping="0.6" friction="0.025" />
+  </joint>
+
+  <joint name="joint5" type="revolute">
+    <parent link="wrist_yaw_back" />
+    <child link="wrist_yaw_front" />
+    <origin xyz="0.029 -0.0359 0.0183" rpy="1.5708 -0.0089173 -3.14159" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.54481" upper="1.52697" effort="30" velocity="5" />
+    <dynamics damping="0.6" friction="0.025" />
+  </joint>
+
+  <joint name="joint4" type="revolute">
+    <parent link="under_arm" />
+    <child link="wrist_yaw_back" />
+    <origin xyz="0.1799 -0.0052 0" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.46608" upper="1.64061" effort="30" velocity="5" />
+    <dynamics damping="0.6" friction="0.025" />
+  </joint>
+
+  <joint name="joint3" type="revolute">
+    <parent link="upper_arm" />
+    <child link="under_arm" />
+    <origin xyz="0.16257 0.028 0" rpy="0 0 1.5708" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.68948" upper="1.5708" effort="30" velocity="5" />
+    <dynamics damping="0.6" friction="0.025" />
+  </joint>
+
+  <joint name="joint2" type="revolute">
+    <parent link="base_rotation" />
+    <child link="upper_arm" />
+    <origin xyz="0.0306 0.0183 -0.0542" rpy="1.5708 1.5708 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.74533" upper="1.74533" effort="30" velocity="5" />
+    <dynamics damping="0.6" friction="0.025" />
+  </joint>
+
+  <joint name="joint1" type="revolute">
+    <parent link="base" />
+    <child link="base_rotation" />
+    <origin xyz="-0.0014647 0.00025 0.0654" rpy="3.14159 0 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.91986" upper="1.91986" effort="30" velocity="5" />
+    <dynamics damping="0.6" friction="0.025" />
+  </joint>
+
+</robot>

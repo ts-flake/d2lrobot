@@ -1,0 +1,1248 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape https://cad.onshape.com/documents/4b445f2c581c716e4bbe4e7a/w/73129f53501352de095b0648/e/d1367581012e9339a3e06dec -->
+<robot name="xlerobot_yaw_long">
+  <!-- Link armbase -->
+  <link name="armbase">
+    <inertial>
+      <origin xyz="-0.00471495 -0.000986818 0.160431" rpy="0 0 0"/>
+      <mass value="0.357"/>
+      <inertia ixx="0.0100687" ixy="-5.98584e-07" ixz="-3.44396e-05" iyy="0.00446015" iyz="-1.72297e-06" izz="0.00591031"/>
+    </inertial>
+    <!-- Part base_motor_holder -->
+    <visual>
+      <origin xyz="-0.0115301 0.135601 0.1183" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/base_motor_holder.stl"/>
+      </geometry>
+      <material name="base_motor_holder_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part gimbel_base -->
+    <visual>
+      <origin xyz="0.0995057 -0.00575016 -0.666216" rpy="0 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/gimbel_base.stl"/>
+      </geometry>
+      <material name="gimbel_base_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part sts3215 -->
+    <visual>
+      <origin xyz="0.006281 0.13545 0.1263" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/sts3215.stl"/>
+      </geometry>
+      <material name="sts3215_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part sts3215_2 -->
+    <visual>
+      <origin xyz="0.006281 -0.1377 0.1263" rpy="-0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/sts3215.stl"/>
+      </geometry>
+      <material name="sts3215_2_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part sts3215_3 -->
+    <visual>
+      <origin xyz="-0.00255622 -0.000850158 0.413684" rpy="-0 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/sts3215.stl"/>
+      </geometry>
+      <material name="sts3215_3_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part neck -->
+    <visual>
+      <origin xyz="0.0987091 -0.00559212 -0.666069" rpy="-0 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/neck.stl"/>
+      </geometry>
+      <material name="neck_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part base -->
+    <visual>
+      <origin xyz="-0.026119 0.1357 0.0802" rpy="1.5708 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/base.stl"/>
+      </geometry>
+      <material name="base_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part base_motor_holder_2 -->
+    <visual>
+      <origin xyz="-0.0115301 -0.137549 0.1183" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/base_motor_holder.stl"/>
+      </geometry>
+      <material name="base_motor_holder_2_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part base_2 -->
+    <visual>
+      <origin xyz="-0.026119 -0.13745 0.0802" rpy="1.5708 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/base.stl"/>
+      </geometry>
+      <material name="base_2_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part base_arm_mount -->
+    <visual>
+      <origin xyz="-0.102582 -0.26915 -0.666041" rpy="0 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/base_arm_mount.stl"/>
+      </geometry>
+      <material name="base_arm_mount_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <!-- Part base_top -->
+    <visual>
+      <origin xyz="-0.102582 0.0039 -0.666041" rpy="-0 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/base_top.stl"/>
+      </geometry>
+      <material name="base_top_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <!-- Part base_bottom2 -->
+    <visual>
+      <origin xyz="-0.102582 0.00385 -0.666041" rpy="-0 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/base_bottom2.stl"/>
+      </geometry>
+      <material name="base_bottom2_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part base_bottom1 -->
+    <visual>
+      <origin xyz="-0.102582 0.0039 -0.666041" rpy="-0 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/base_bottom1.stl"/>
+      </geometry>
+      <material name="base_bottom1_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part base_arm_mount_2 -->
+    <visual>
+      <origin xyz="-0.102582 0.004 -0.666041" rpy="-0 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/base_arm_mount.stl"/>
+      </geometry>
+      <material name="base_arm_mount_2_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link gimbal_yaw -->
+  <link name="gimbal_yaw">
+    <inertial>
+      <origin xyz="0.0185205 -0.000139894 -0.0202775" rpy="0 0 0"/>
+      <mass value="0.0865659"/>
+      <inertia ixx="1.98187e-05" ixy="-1.07617e-07" ixz="1.84205e-06" iyy="2.46995e-05" iyz="-6.9766e-08" izz="2.89308e-05"/>
+    </inertial>
+    <!-- Part sts3215_4 -->
+    <visual>
+      <origin xyz="0.0165112 -0.0001 -0.0237694" rpy="-1.5708 0.00872665 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/sts3215.stl"/>
+      </geometry>
+      <material name="sts3215_4_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part gimbal_yaw -->
+    <visual>
+      <origin xyz="0.10475 0.00480057 1.09833" rpy="3.14159 -0.00872665 0"/>
+      <geometry>
+        <mesh filename="package://assets/gimbal_yaw.stl"/>
+      </geometry>
+      <material name="gimbal_yaw_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link camera_mount1 -->
+  <link name="camera_mount1">
+    <inertial>
+      <origin xyz="0.00208788 -0.0146436 0.0198007" rpy="0 0 0"/>
+      <mass value="0.0329637"/>
+      <inertia ixx="2.51609e-05" ixy="1.50074e-06" ixz="7.274e-09" iyy="1.9524e-05" iyz="-4.8404e-08" izz="9.1842e-06"/>
+    </inertial>
+    <!-- Part camera_mount1 -->
+    <visual>
+      <origin xyz="-0.110246 1.12054 0.0238752" rpy="-1.5708 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/camera_mount1.stl"/>
+      </geometry>
+      <material name="camera_mount1_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Frame head_camera (dummy link + fixed joint) -->
+  <link name="head_camera">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="head_camera_frame" type="fixed">
+    <origin xyz="0.0116881 -0.0357843 0.0197" rpy="1.5708 -0 -0.00872904"/>
+    <parent link="camera_mount1"/>
+    <child link="head_camera"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from gimbal_yaw to camera_mount1 -->
+  <joint name="head_pitch" type="revolute">
+    <origin xyz="0.00401166 -0.0188 -0.0238785" rpy="1.5708 0.00872665 -3.14159"/>
+    <parent link="gimbal_yaw"/>
+    <child link="camera_mount1"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="33" velocity="5" lower="-0.17453" upper="1.39627"/>
+  </joint>
+  <!-- Joint from armbase to gimbal_yaw -->
+  <joint name="head_yaw" type="revolute">
+    <origin xyz="-0.0150562 -0.000850158 0.432384" rpy="3.14159 0 -3.09567"/>
+    <parent link="armbase"/>
+    <child link="gimbal_yaw"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="33" velocity="5" lower="-2.92114" upper="3.01298"/>
+  </joint>
+  <!-- Link base_rotation -->
+  <link name="base_rotation">
+    <inertial>
+      <origin xyz="-0.0309888 -5.41298e-05 -0.0231919" rpy="0 0 0"/>
+      <mass value="0.102"/>
+      <inertia ixx="9.02965e-05" ixy="7.5174e-08" ixz="-1.45987e-06" iyy="8.80808e-05" iyz="1.36387e-07" izz="2.50511e-05"/>
+    </inertial>
+    <!-- Part sts3215_5 -->
+    <visual>
+      <origin xyz="-0.0306 0.0004 -0.0417" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/sts3215.stl"/>
+      </geometry>
+      <material name="sts3215_5_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part base_rotation -->
+    <visual>
+      <origin xyz="0 0 0.0181" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/base_rotation.stl"/>
+      </geometry>
+      <material name="base_rotation_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part arm_motor_holder -->
+    <visual>
+      <origin xyz="-0.0328847 -9.91675e-05 -0.01" rpy="3.14159 -0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/arm_motor_holder.stl"/>
+      </geometry>
+      <material name="arm_motor_holder_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link upper_arm -->
+  <link name="upper_arm">
+    <inertial>
+      <origin xyz="0.123747 0.00774011 0.0198926" rpy="0 0 0"/>
+      <mass value="0.106"/>
+      <inertia ixx="4.16013e-05" ixy="-3.20918e-05" ixz="-1.01722e-07" iyy="0.000319679" iyz="-2.3966e-08" izz="0.000313921"/>
+    </inertial>
+    <!-- Part upper_arm -->
+    <visual>
+      <origin xyz="0.065085 -0.012 0.0197" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/upper_arm.stl"/>
+      </geometry>
+      <material name="upper_arm_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part sts3215_6 -->
+    <visual>
+      <origin xyz="0.162485 0.0155 0.0202" rpy="3.14159 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/sts3215.stl"/>
+      </geometry>
+      <material name="sts3215_6_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link under_arm -->
+  <link name="under_arm">
+    <inertial>
+      <origin xyz="-0.131353 0.00305915 0.019784" rpy="0 0 0"/>
+      <mass value="0.11"/>
+      <inertia ixx="3.18998e-05" ixy="1.10749e-05" ixz="1.51715e-06" iyy="0.000305526" iyz="-3.6791e-08" izz="0.000289193"/>
+    </inertial>
+    <!-- Part under_arm -->
+    <visual>
+      <origin xyz="-0.0698937 -0.012 0.0195425" rpy="-1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/under_arm.stl"/>
+      </geometry>
+      <material name="under_arm_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part wrist_motor_holder -->
+    <visual>
+      <origin xyz="-0.1357 0.00291526 0.0196008" rpy="1.5708 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/wrist_motor_holder.stl"/>
+      </geometry>
+      <material name="wrist_motor_holder_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part sts3215_7 -->
+    <visual>
+      <origin xyz="-0.1674 0.0052 0.0202" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/sts3215.stl"/>
+      </geometry>
+      <material name="sts3215_7_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link wrist_yaw_back -->
+  <link name="wrist_yaw_back">
+    <inertial>
+      <origin xyz="0.0170191 -0.00963991 0.0200001" rpy="0 0 0"/>
+      <mass value="0.02"/>
+      <inertia ixx="8.43061e-06" ixy="1.40805e-06" ixz="3.5e-11" iyy="6.67798e-06" iyz="-5.3e-11" izz="6.60703e-06"/>
+    </inertial>
+    <!-- Part wrist_yaw_back -->
+    <visual>
+      <origin xyz="0 0 0.02" rpy="-1.5708 -0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/wrist_yaw_back.stl"/>
+      </geometry>
+      <material name="wrist_yaw_back_material">
+        <color rgba="0.756863 0.180392 0.121569 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link wrist_yaw_front -->
+  <link name="wrist_yaw_front">
+    <inertial>
+      <origin xyz="-0.0288469 3.2095e-05 0.00318547" rpy="0 0 0"/>
+      <mass value="0.14"/>
+      <inertia ixx="9.23015e-05" ixy="4.5939e-08" ixz="3.54146e-05" iyy="0.000129134" iyz="2.4354e-08" izz="5.50963e-05"/>
+    </inertial>
+    <!-- Part sts3215_8 -->
+    <visual>
+      <origin xyz="-0.0428 0 0.025043" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/sts3215.stl"/>
+      </geometry>
+      <material name="sts3215_8_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part sts3215_9 -->
+    <visual>
+      <origin xyz="-0.0125 0 -0.0187" rpy="-0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/sts3215.stl"/>
+      </geometry>
+      <material name="sts3215_9_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part wrist_yaw_front -->
+    <visual>
+      <origin xyz="-0.0283 0 0.0037965" rpy="3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/wrist_yaw_front.stl"/>
+      </geometry>
+      <material name="wrist_yaw_front_material">
+        <color rgba="0.756863 0.180392 0.121569 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link gripper_fixed -->
+  <link name="gripper_fixed">
+    <inertial>
+      <origin xyz="7.14386e-05 -0.00628282 -0.0223438" rpy="0 0 0"/>
+      <mass value="0.098"/>
+      <inertia ixx="6.55864e-05" ixy="-1.73696e-06" ixz="6.75799e-06" iyy="5.30195e-05" iyz="1.40487e-05" izz="6.58639e-05"/>
+    </inertial>
+    <!-- Part wrist_camera_mount -->
+    <visual>
+      <origin xyz="0.015 -0.024 -0.0315502" rpy="-1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/wrist_camera_mount.stl"/>
+      </geometry>
+      <material name="wrist_camera_mount_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part gripper_fixed -->
+    <visual>
+      <origin xyz="-0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/gripper_fixed.stl"/>
+      </geometry>
+      <material name="gripper_fixed_material">
+        <color rgba="0.964706 0.964706 0.952941 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_00000.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_00001.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_00002.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_00003.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_00004.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_00005.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_00006.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_00007.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_00008.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_00009.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_00010.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_00011.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_00012.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_00013.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_00014.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_00015.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part sts3215_10 -->
+    <visual>
+      <origin xyz="-0.0077 -0.0001 -0.0234" rpy="-1.5708 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/sts3215.stl"/>
+      </geometry>
+      <material name="sts3215_10_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Frame left_gripper_back (dummy link + fixed joint) -->
+  <link name="left_gripper_back">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="left_gripper_back_frame" type="fixed">
+    <origin xyz="-0 -0 0" rpy="1.5708 1.5708 0"/>
+    <parent link="gripper_fixed"/>
+    <child link="left_gripper_back"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame left_gripper_center (dummy link + fixed joint) -->
+  <link name="left_gripper_center">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="left_gripper_center_frame" type="fixed">
+    <origin xyz="-0 0 -0.055" rpy="1.5708 1.5708 0"/>
+    <parent link="gripper_fixed"/>
+    <child link="left_gripper_center"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame left_camera (dummy link + fixed joint) -->
+  <link name="left_camera">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="left_camera_frame" type="fixed">
+    <origin xyz="-0.0025 -0.0715738 0.00275875" rpy="3.14159 1.13446 1.5708"/>
+    <parent link="gripper_fixed"/>
+    <child link="left_camera"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link gripper_jaw -->
+  <link name="gripper_jaw">
+    <inertial>
+      <origin xyz="-0.00157495 -0.0300244 0.0207755" rpy="0 0 0"/>
+      <mass value="0.013"/>
+      <inertia ixx="7.16546e-06" ixy="-3.46457e-07" ixz="-6.399e-09" iyy="2.04784e-06" iyz="-1.19108e-07" izz="5.72799e-06"/>
+    </inertial>
+    <!-- Part gripper_jaw -->
+    <visual>
+      <origin xyz="-0 -0 0.0204" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/gripper_jaw.stl"/>
+      </geometry>
+      <material name="gripper_jaw_material">
+        <color rgba="0.964706 0.964706 0.952941 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0 0.0204" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_00000.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 -0 0.0204" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_00001.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 -0 0.0204" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_00002.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 -0 0.0204" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_00003.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 -0 0.0204" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_00004.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 -0 0.0204" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_00005.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 -0 0.0204" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_00006.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 -0 0.0204" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_00007.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 -0 0.0204" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_00008.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 -0 0.0204" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_00009.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 -0 0.0204" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_00010.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 -0 0.0204" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_00011.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 -0 0.0204" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_00012.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 -0 0.0204" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_00013.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 -0 0.0204" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_00014.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0 -0 0.0204" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_00015.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from gripper_fixed to gripper_jaw -->
+  <joint name="left_joint7" type="revolute">
+    <origin xyz="-0.0202 -0.0188 -0.0234" rpy="1.5708 0 3.14159"/>
+    <parent link="gripper_fixed"/>
+    <child link="gripper_jaw"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="33" velocity="5" lower="-0.174533" upper="1.74533"/>
+  </joint>
+  <!-- Joint from wrist_yaw_front to gripper_fixed -->
+  <joint name="left_joint6" type="revolute">
+    <origin xyz="-0.0615 0 0.037543" rpy="3.14159 -1.5708 0"/>
+    <parent link="wrist_yaw_front"/>
+    <child link="gripper_fixed"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="33" velocity="5" lower="-2.96706" upper="2.86234"/>
+  </joint>
+  <!-- Joint from wrist_yaw_back to wrist_yaw_front -->
+  <joint name="left_joint5" type="revolute">
+    <origin xyz="0.029 -0.0359 0.02" rpy="1.5708 -0 3.14159"/>
+    <parent link="wrist_yaw_back"/>
+    <child link="wrist_yaw_front"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="33" velocity="5" lower="-1.53589" upper="1.53589"/>
+  </joint>
+  <!-- Joint from under_arm to wrist_yaw_back -->
+  <joint name="left_joint4" type="revolute">
+    <origin xyz="-0.1799 0.0052 0.0015" rpy="0 0 3.14159"/>
+    <parent link="under_arm"/>
+    <child link="wrist_yaw_back"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="33" velocity="5" lower="-1.46608" upper="1.64061"/>
+  </joint>
+  <!-- Joint from upper_arm to under_arm -->
+  <joint name="left_joint3" type="revolute">
+    <origin xyz="0.162485 0.028 0.0015" rpy="0 -0 -1.5708"/>
+    <parent link="upper_arm"/>
+    <child link="under_arm"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="33" velocity="5" lower="-1.68948" upper="1.5708"/>
+  </joint>
+  <!-- Joint from base_rotation to upper_arm -->
+  <joint name="left_joint2" type="revolute">
+    <origin xyz="-0.0306 -0.0183 -0.0542" rpy="-1.5708 1.5708 0"/>
+    <parent link="base_rotation"/>
+    <child link="upper_arm"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="33" velocity="5" lower="-1.74533" upper="1.74533"/>
+  </joint>
+  <!-- Joint from armbase to base_rotation -->
+  <joint name="left_joint1" type="revolute">
+    <origin xyz="0.018781 0.13545 0.145" rpy="3.14159 0 -3.14159"/>
+    <parent link="armbase"/>
+    <child link="base_rotation"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="33" velocity="5" lower="-1.91986" upper="1.91986"/>
+  </joint>
+  <!-- Link sts3215 -->
+  <link name="sts3215">
+    <inertial>
+      <origin xyz="-0.0309888 -5.41298e-05 -0.0231919" rpy="0 0 0"/>
+      <mass value="0.102"/>
+      <inertia ixx="9.02965e-05" ixy="7.5174e-08" ixz="-1.45987e-06" iyy="8.80808e-05" iyz="1.36387e-07" izz="2.50511e-05"/>
+    </inertial>
+    <!-- Part sts3215_11 -->
+    <visual>
+      <origin xyz="-0.0306 0.0004 -0.0417" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/sts3215.stl"/>
+      </geometry>
+      <material name="sts3215_11_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part arm_motor_holder_2 -->
+    <visual>
+      <origin xyz="-0.0328847 -9.91675e-05 -0.01" rpy="3.14159 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/arm_motor_holder.stl"/>
+      </geometry>
+      <material name="arm_motor_holder_2_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part base_rotation_2 -->
+    <visual>
+      <origin xyz="0 0 0.0181" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/base_rotation.stl"/>
+      </geometry>
+      <material name="base_rotation_2_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link sts3215_2 -->
+  <link name="sts3215_2">
+    <inertial>
+      <origin xyz="0.123747 0.00774011 0.0198926" rpy="0 0 0"/>
+      <mass value="0.106"/>
+      <inertia ixx="4.16013e-05" ixy="-3.20918e-05" ixz="-1.01722e-07" iyy="0.000319679" iyz="-2.3966e-08" izz="0.000313921"/>
+    </inertial>
+    <!-- Part upper_arm_2 -->
+    <visual>
+      <origin xyz="0.065085 -0.012 0.0197" rpy="-3.14159 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/upper_arm.stl"/>
+      </geometry>
+      <material name="upper_arm_2_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part sts3215_12 -->
+    <visual>
+      <origin xyz="0.162485 0.0155 0.0202" rpy="3.14159 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/sts3215.stl"/>
+      </geometry>
+      <material name="sts3215_12_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link sts3215_3 -->
+  <link name="sts3215_3">
+    <inertial>
+      <origin xyz="-0.131353 0.00305915 0.019784" rpy="0 0 0"/>
+      <mass value="0.11"/>
+      <inertia ixx="3.18998e-05" ixy="1.10749e-05" ixz="1.51715e-06" iyy="0.000305526" iyz="-3.6791e-08" izz="0.000289193"/>
+    </inertial>
+    <!-- Part sts3215_13 -->
+    <visual>
+      <origin xyz="-0.1674 0.0052 0.0202" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/sts3215.stl"/>
+      </geometry>
+      <material name="sts3215_13_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part wrist_motor_holder_2 -->
+    <visual>
+      <origin xyz="-0.1357 0.00291526 0.0196008" rpy="1.5708 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/wrist_motor_holder.stl"/>
+      </geometry>
+      <material name="wrist_motor_holder_2_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part under_arm_2 -->
+    <visual>
+      <origin xyz="-0.0698937 -0.012 0.0195425" rpy="-1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/under_arm.stl"/>
+      </geometry>
+      <material name="under_arm_2_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link wrist_yaw_back_2 -->
+  <link name="wrist_yaw_back_2">
+    <inertial>
+      <origin xyz="0.0170191 -0.00963991 0.0200001" rpy="0 0 0"/>
+      <mass value="0.02"/>
+      <inertia ixx="8.43061e-06" ixy="1.40805e-06" ixz="3.5e-11" iyy="6.67798e-06" iyz="-5.3e-11" izz="6.60703e-06"/>
+    </inertial>
+    <!-- Part wrist_yaw_back_2 -->
+    <visual>
+      <origin xyz="0 0 0.02" rpy="-1.5708 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/wrist_yaw_back.stl"/>
+      </geometry>
+      <material name="wrist_yaw_back_2_material">
+        <color rgba="0.756863 0.180392 0.121569 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link sts3215_4 -->
+  <link name="sts3215_4">
+    <inertial>
+      <origin xyz="-0.0288469 3.2095e-05 0.00318547" rpy="0 0 0"/>
+      <mass value="0.14"/>
+      <inertia ixx="9.23015e-05" ixy="4.5939e-08" ixz="3.54146e-05" iyy="0.000129134" iyz="2.4354e-08" izz="5.50963e-05"/>
+    </inertial>
+    <!-- Part sts3215_14 -->
+    <visual>
+      <origin xyz="-0.0125 0 -0.0187" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/sts3215.stl"/>
+      </geometry>
+      <material name="sts3215_14_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part sts3215_15 -->
+    <visual>
+      <origin xyz="-0.0428 -0 0.025043" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/sts3215.stl"/>
+      </geometry>
+      <material name="sts3215_15_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part wrist_yaw_front_2 -->
+    <visual>
+      <origin xyz="-0.0283 -0 0.0037965" rpy="3.14159 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/wrist_yaw_front.stl"/>
+      </geometry>
+      <material name="wrist_yaw_front_2_material">
+        <color rgba="0.756863 0.180392 0.121569 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link sts3215_5 -->
+  <link name="sts3215_5">
+    <inertial>
+      <origin xyz="7.14386e-05 -0.00628282 -0.0223438" rpy="0 0 0"/>
+      <mass value="0.098"/>
+      <inertia ixx="6.55864e-05" ixy="-1.73696e-06" ixz="6.75799e-06" iyy="5.30195e-05" iyz="1.40487e-05" izz="6.58639e-05"/>
+    </inertial>
+    <!-- Part gripper_fixed_2 -->
+    <visual>
+      <origin xyz="0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/gripper_fixed.stl"/>
+      </geometry>
+      <material name="gripper_fixed_2_material">
+        <color rgba="0.964706 0.964706 0.952941 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_2_00000.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_2_00001.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_2_00002.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_2_00003.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_2_00004.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_2_00005.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_2_00006.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_2_00007.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_2_00008.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_2_00009.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_2_00010.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_2_00011.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_2_00012.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_2_00013.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_2_00014.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0.000218214 0.000949706" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_fixed_2_00015.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part wrist_camera_mount_2 -->
+    <visual>
+      <origin xyz="0.015 -0.024 -0.0315502" rpy="-1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/wrist_camera_mount.stl"/>
+      </geometry>
+      <material name="wrist_camera_mount_2_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+    <!-- Part sts3215_16 -->
+    <visual>
+      <origin xyz="-0.0077 -0.0001 -0.0234" rpy="-1.5708 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/sts3215.stl"/>
+      </geometry>
+      <material name="sts3215_16_material">
+        <color rgba="0.235294 0.235294 0.235294 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Frame right_gripper_back (dummy link + fixed joint) -->
+  <link name="right_gripper_back">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="right_gripper_back_frame" type="fixed">
+    <origin xyz="0 0 0" rpy="1.5708 1.5708 0"/>
+    <parent link="sts3215_5"/>
+    <child link="right_gripper_back"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame right_gripper_center (dummy link + fixed joint) -->
+  <link name="right_gripper_center">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="right_gripper_center_frame" type="fixed">
+    <origin xyz="0 0 -0.055" rpy="1.5708 1.5708 0"/>
+    <parent link="sts3215_5"/>
+    <child link="right_gripper_center"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame right_camera (dummy link + fixed joint) -->
+  <link name="right_camera">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="right_camera_frame" type="fixed">
+    <origin xyz="-0.0025 -0.0713819 0.00284821" rpy="3.14159 1.13446 1.5708"/>
+    <parent link="sts3215_5"/>
+    <child link="right_camera"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link gripper_jaw_2 -->
+  <link name="gripper_jaw_2">
+    <inertial>
+      <origin xyz="-0.00157495 -0.0300244 0.0207755" rpy="0 0 0"/>
+      <mass value="0.013"/>
+      <inertia ixx="7.16546e-06" ixy="-3.46457e-07" ixz="-6.399e-09" iyy="2.04784e-06" iyz="-1.19108e-07" izz="5.72799e-06"/>
+    </inertial>
+    <!-- Part gripper_jaw_2 -->
+    <visual>
+      <origin xyz="0 0 0.0204" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/gripper_jaw.stl"/>
+      </geometry>
+      <material name="gripper_jaw_2_material">
+        <color rgba="0.964706 0.964706 0.952941 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_2_00000.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_2_00001.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_2_00002.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_2_00003.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_2_00004.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_2_00005.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_2_00006.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_2_00007.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_2_00008.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_2_00009.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_2_00010.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_2_00011.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_2_00012.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_2_00013.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_2_00014.stl"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0 0.0204" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package:///home/dhan/Desktop/study/d2lrobot/sim/robot_urdf/onshape_to_robot/xlerobot_yaw_long/assets/convex_decomposition/gripper_jaw_2_00015.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from sts3215_5 to gripper_jaw_2 -->
+  <joint name="right_joint7" type="revolute">
+    <origin xyz="-0.0202 -0.0188 -0.0234" rpy="1.5708 0 3.14159"/>
+    <parent link="sts3215_5"/>
+    <child link="gripper_jaw_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="33" velocity="5" lower="-0.174533" upper="1.74533"/>
+  </joint>
+  <!-- Joint from sts3215_4 to sts3215_5 -->
+  <joint name="right_joint6" type="revolute">
+    <origin xyz="-0.0615 -0 0.037543" rpy="3.14159 -1.5708 0"/>
+    <parent link="sts3215_4"/>
+    <child link="sts3215_5"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="33" velocity="5" lower="-2.96706" upper="2.86234"/>
+  </joint>
+  <!-- Joint from wrist_yaw_back_2 to sts3215_4 -->
+  <joint name="right_joint5" type="revolute">
+    <origin xyz="0.029 -0.0359 0.02" rpy="1.5708 0 3.14159"/>
+    <parent link="wrist_yaw_back_2"/>
+    <child link="sts3215_4"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="33" velocity="5" lower="-1.53589" upper="1.53589"/>
+  </joint>
+  <!-- Joint from sts3215_3 to wrist_yaw_back_2 -->
+  <joint name="right_joint4" type="revolute">
+    <origin xyz="-0.1799 0.0052 0.0015" rpy="0 0 3.14159"/>
+    <parent link="sts3215_3"/>
+    <child link="wrist_yaw_back_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="33" velocity="5" lower="-1.46608" upper="1.64061"/>
+  </joint>
+  <!-- Joint from sts3215_2 to sts3215_3 -->
+  <joint name="right_joint3" type="revolute">
+    <origin xyz="0.162485 0.028 0.0015" rpy="-0 0 -1.5708"/>
+    <parent link="sts3215_2"/>
+    <child link="sts3215_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="33" velocity="5" lower="-1.68948" upper="1.5708"/>
+  </joint>
+  <!-- Joint from sts3215 to sts3215_2 -->
+  <joint name="right_joint2" type="revolute">
+    <origin xyz="-0.0306 -0.0183 -0.0542" rpy="-1.5708 1.5708 0"/>
+    <parent link="sts3215"/>
+    <child link="sts3215_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="33" velocity="5" lower="-1.74533" upper="1.74533"/>
+  </joint>
+  <!-- Joint from armbase to sts3215 -->
+  <joint name="right_joint1" type="revolute">
+    <origin xyz="0.018781 -0.1377 0.145" rpy="-3.14159 0 3.14159"/>
+    <parent link="armbase"/>
+    <child link="sts3215"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="33" velocity="5" lower="-1.91986" upper="1.91986"/>
+  </joint>
+</robot>

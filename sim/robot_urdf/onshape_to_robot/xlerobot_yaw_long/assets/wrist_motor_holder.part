@@ -1,0 +1,14 @@
+{
+    "configuration": "default",
+    "documentId": "c360634cacc6134dc08b8b48",
+    "documentMicroversion": "a91287404ed2821d42076820",
+    "documentVersion": "09c999f861db7d3a216f79c3",
+    "elementId": "e426738f039eb49f6c23a6c2",
+    "fullConfiguration": "default",
+    "id": "MSZ2Q94HTr9zUDteH",
+    "isStandardContent": false,
+    "name": "wrist_motor_holder <2>",
+    "partId": "JFD",
+    "suppressed": false,
+    "type": "Part"
+}
