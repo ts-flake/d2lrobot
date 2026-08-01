@@ -46,7 +46,7 @@
       <visual name="raskog">
         <origin xyz="-0.01668 0.502 0.895" rpy="1.5708 0 0" />
         <geometry>
-          <mesh filename="meshes/raskogbody.stl" scale="0.0009 0.001 0.0009" />
+          <mesh filename="package://assets/raskogbody.stl" scale="0.0009 0.001 0.0009" />
         </geometry>
         <material name="blue">
           <color rgba="0.20000000 0.30000000 0.60000000 1.00000000"/>
@@ -55,7 +55,7 @@
       <visual name="raskogwheel1">
         <origin xyz="-0.01668 0.502 0.895" rpy="1.5708 0 0" />
         <geometry>
-          <mesh filename="meshes/raskogwheel1.stl" scale="0.0009 0.001 0.0009" />
+          <mesh filename="package://assets/raskogwheel1.stl" scale="0.0009 0.001 0.0009" />
         </geometry>
         <material name="grey">
           <color rgba="0.60000000 0.60000000 0.60000000 1.00000000"/>
@@ -64,7 +64,7 @@
       <visual name="raskogwheel2">
         <origin xyz="-0.01668 0.502 0.895" rpy="1.5708 0 0" />
         <geometry>
-          <mesh filename="meshes/raskogwheel2.stl" scale="0.0009 0.001 0.0009" />
+          <mesh filename="package://assets/raskogwheel2.stl" scale="0.0009 0.001 0.0009" />
         </geometry>
         <material name="motor">
           <color rgba="0.02000000 0.02000000 0.02000000 1.00000000"/>
@@ -135,7 +135,7 @@
     <visual>
       <origin xyz="-0.0115301 0.135601 0.1183" rpy="1.5708 0 1.5708" />
       <geometry>
-        <mesh filename="meshes/assets/base_motor_holder.stl" />
+        <mesh filename="package://assets/base_motor_holder.stl" />
       </geometry>
       <material name="base_motor_holder_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -144,7 +144,7 @@
     <visual>
       <origin xyz="0.0995057 -0.0057502 -0.666216" rpy="0 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/gimbel_base.stl" />
+        <mesh filename="package://assets/gimbel_base.stl" />
       </geometry>
       <material name="gimbel_base_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -153,7 +153,7 @@
     <visual>
       <origin xyz="0.006281 0.13545 0.1263" rpy="0 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/sts3215.stl" />
+        <mesh filename="package://assets/sts3215.stl" />
       </geometry>
       <material name="sts3215_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -162,7 +162,7 @@
     <visual>
       <origin xyz="0.006281 -0.1377 0.1263" rpy="0 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/sts3215.stl" />
+        <mesh filename="package://assets/sts3215.stl" />
       </geometry>
       <material name="sts3215_2_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -171,7 +171,7 @@
     <visual>
       <origin xyz="-0.0025562 -0.0008502 0.413684" rpy="0 0 3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/sts3215.stl" />
+        <mesh filename="package://assets/sts3215.stl" />
       </geometry>
       <material name="sts3215_3_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -180,7 +180,7 @@
     <visual>
       <origin xyz="0.0987091 -0.0055921 -0.666069" rpy="0 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/neck.stl" />
+        <mesh filename="package://assets/neck.stl" />
       </geometry>
       <material name="neck_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -189,7 +189,7 @@
     <visual>
       <origin xyz="-0.026119 0.1357 0.0802" rpy="1.5708 0 1.5708" />
       <geometry>
-        <mesh filename="meshes/assets/base.stl" />
+        <mesh filename="package://assets/base.stl" />
       </geometry>
       <material name="base_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -198,7 +198,7 @@
     <visual>
       <origin xyz="-0.0115301 -0.137549 0.1183" rpy="1.5708 0 1.5708" />
       <geometry>
-        <mesh filename="meshes/assets/base_motor_holder.stl" />
+        <mesh filename="package://assets/base_motor_holder.stl" />
       </geometry>
       <material name="base_motor_holder_2_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -207,7 +207,7 @@
     <visual>
       <origin xyz="-0.026119 -0.13745 0.0802" rpy="1.5708 0 1.5708" />
       <geometry>
-        <mesh filename="meshes/assets/base.stl" />
+        <mesh filename="package://assets/base.stl" />
       </geometry>
       <material name="base_2_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -216,7 +216,7 @@
     <visual>
       <origin xyz="-0.102582 -0.26915 -0.666041" rpy="0 0 3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/base_arm_mount.stl" />
+        <mesh filename="package://assets/base_arm_mount.stl" />
       </geometry>
       <material name="base_arm_mount_material">
         <color rgba="0.91764700 0.91764700 0.91764700 1.00000000"/>
@@ -225,7 +225,7 @@
     <visual>
       <origin xyz="-0.102582 0.0039 -0.666041" rpy="0 0 3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/base_top.stl" />
+        <mesh filename="package://assets/base_top.stl" />
       </geometry>
       <material name="base_top_material">
         <color rgba="0.91764700 0.91764700 0.91764700 1.00000000"/>
@@ -234,7 +234,7 @@
     <visual>
       <origin xyz="-0.102582 0.00385 -0.666041" rpy="0 0 3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/base_bottom2.stl" />
+        <mesh filename="package://assets/base_bottom2.stl" />
       </geometry>
       <material name="base_bottom2_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -243,7 +243,7 @@
     <visual>
       <origin xyz="-0.102582 0.0039 -0.666041" rpy="0 0 -3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/base_bottom1.stl" />
+        <mesh filename="package://assets/base_bottom1.stl" />
       </geometry>
       <material name="base_bottom1_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -252,7 +252,7 @@
     <visual>
       <origin xyz="-0.102582 0.004 -0.666041" rpy="0 0 3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/base_arm_mount.stl" />
+        <mesh filename="package://assets/base_arm_mount.stl" />
       </geometry>
       <material name="base_arm_mount_2_material">
         <color rgba="0.91764700 0.91764700 0.91764700 1.00000000"/>
@@ -299,7 +299,7 @@
     <visual>
       <origin xyz="0.0165112 -0.0001 -0.0237694" rpy="-1.5708 0.0087267 -3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/sts3215.stl" />
+        <mesh filename="package://assets/sts3215.stl" />
       </geometry>
       <material name="sts3215_4_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -308,7 +308,7 @@
     <visual>
       <origin xyz="0.10475 0.0048006 1.09833" rpy="-3.14159 -0.0087267 0" />
       <geometry>
-        <mesh filename="meshes/assets/gimbal_yaw.stl" />
+        <mesh filename="package://assets/gimbal_yaw.stl" />
       </geometry>
       <material name="gimbal_yaw_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -331,7 +331,7 @@
     <visual>
       <origin xyz="-0.11025 1.12054 0.0238752" rpy="-1.5708 0 3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/camera_mount1.stl" />
+        <mesh filename="package://assets/camera_mount1.stl" />
       </geometry>
       <material name="camera_mount1_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -362,7 +362,7 @@
     <visual>
       <origin xyz="-0.0306 0.0004 -0.0417" rpy="1.5708 1.5708 0" />
       <geometry>
-        <mesh filename="meshes/assets/sts3215.stl" />
+        <mesh filename="package://assets/sts3215.stl" />
       </geometry>
       <material name="sts3215_5_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -371,7 +371,7 @@
     <visual>
       <origin xyz="0 0 0.0181" rpy="-3.14159 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/base_rotation.stl" />
+        <mesh filename="package://assets/base_rotation.stl" />
       </geometry>
       <material name="base_rotation_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -380,7 +380,7 @@
     <visual>
       <origin xyz="-0.0328847 -0.0000992 -0.01" rpy="3.14159 0 -3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/arm_motor_holder.stl" />
+        <mesh filename="package://assets/arm_motor_holder.stl" />
       </geometry>
       <material name="arm_motor_holder_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -409,7 +409,7 @@
     <visual>
       <origin xyz="0.065085 -0.012 0.0197" rpy="-3.14159 0 3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/upper_arm.stl" />
+        <mesh filename="package://assets/upper_arm.stl" />
       </geometry>
       <material name="upper_arm_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -418,7 +418,7 @@
     <visual>
       <origin xyz="0.162485 0.0155 0.0202" rpy="3.14159 0 1.5708" />
       <geometry>
-        <mesh filename="meshes/assets/sts3215.stl" />
+        <mesh filename="package://assets/sts3215.stl" />
       </geometry>
       <material name="sts3215_6_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -447,7 +447,7 @@
     <visual>
       <origin xyz="-0.0698937 -0.012 0.0195425" rpy="-1.5708 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/under_arm.stl" />
+        <mesh filename="package://assets/under_arm.stl" />
       </geometry>
       <material name="under_arm_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -456,7 +456,7 @@
     <visual>
       <origin xyz="-0.1357 0.0029153 0.0196008" rpy="1.5708 0 -1.5708" />
       <geometry>
-        <mesh filename="meshes/assets/wrist_motor_holder.stl" />
+        <mesh filename="package://assets/wrist_motor_holder.stl" />
       </geometry>
       <material name="wrist_motor_holder_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -465,7 +465,7 @@
     <visual>
       <origin xyz="-0.1674 0.0052 0.0202" rpy="-3.14159 0 3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/sts3215.stl" />
+        <mesh filename="package://assets/sts3215.stl" />
       </geometry>
       <material name="sts3215_7_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -494,7 +494,7 @@
     <visual>
       <origin xyz="0 0 0.02" rpy="-1.5708 0 -3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/wrist_yaw_back.stl" />
+        <mesh filename="package://assets/wrist_yaw_back.stl" />
       </geometry>
       <material name="wrist_yaw_back_material">
         <color rgba="0.75686300 0.18039200 0.12156900 1.00000000"/>
@@ -523,7 +523,7 @@
     <visual>
       <origin xyz="-0.0428 0 0.025043" rpy="0 -1.5708 0" />
       <geometry>
-        <mesh filename="meshes/assets/sts3215.stl" />
+        <mesh filename="package://assets/sts3215.stl" />
       </geometry>
       <material name="sts3215_8_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -532,7 +532,7 @@
     <visual>
       <origin xyz="-0.0125 0 -0.0187" rpy="0 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/sts3215.stl" />
+        <mesh filename="package://assets/sts3215.stl" />
       </geometry>
       <material name="sts3215_9_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -541,7 +541,7 @@
     <visual>
       <origin xyz="-0.0283 0 0.0037965" rpy="3.14159 0 3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/wrist_yaw_front.stl" />
+        <mesh filename="package://assets/wrist_yaw_front.stl" />
       </geometry>
       <material name="wrist_yaw_front_material">
         <color rgba="0.75686300 0.18039200 0.12156900 1.00000000"/>
@@ -570,7 +570,7 @@
     <visual>
       <origin xyz="0.015 -0.024 -0.0315502" rpy="-1.5708 0 1.5708" />
       <geometry>
-        <mesh filename="meshes/assets/wrist_camera_mount.stl" />
+        <mesh filename="package://assets/wrist_camera_mount.stl" />
       </geometry>
       <material name="wrist_camera_mount_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -579,7 +579,7 @@
     <visual>
       <origin xyz="0 0.0002182 0.0009497" rpy="-3.14159 0 3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/gripper_fixed.stl" />
+        <mesh filename="package://assets/gripper_fixed.stl" />
       </geometry>
       <material name="gripper_fixed_material">
         <color rgba="0.96470600 0.96470600 0.95294100 1.00000000"/>
@@ -588,7 +588,7 @@
     <visual>
       <origin xyz="-0.0077 -0.0001 -0.0234" rpy="-1.5708 0 3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/sts3215.stl" />
+        <mesh filename="package://assets/sts3215.stl" />
       </geometry>
       <material name="sts3215_10_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -603,7 +603,7 @@
     <collision>
       <origin xyz="0 0.0002182 0.0009497" rpy="-3.14159 0 3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/convex_decomposition/gripper_fixed_00002.stl" />
+        <mesh filename="package://assets/convex_decomposition/gripper_fixed_00002.stl" />
       </geometry>
     </collision>
     <collision>
@@ -659,7 +659,7 @@
     <visual>
       <origin xyz="0 0 0.0204" rpy="0 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/gripper_jaw.stl" />
+        <mesh filename="package://assets/gripper_jaw.stl" />
       </geometry>
       <material name="gripper_jaw_material">
         <color rgba="0.96470600 0.96470600 0.95294100 1.00000000"/>
@@ -668,25 +668,25 @@
     <collision>
       <origin xyz="0 0 0.0204" rpy="0 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/convex_decomposition/gripper_jaw_00006.stl" />
+        <mesh filename="package://assets/convex_decomposition/gripper_jaw_00006.stl" />
       </geometry>
     </collision>
     <collision>
       <origin xyz="0 0 0.0204" rpy="0 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/convex_decomposition/gripper_jaw_00009.stl" />
+        <mesh filename="package://assets/convex_decomposition/gripper_jaw_00009.stl" />
       </geometry>
     </collision>
     <collision>
       <origin xyz="0 0 0.0204" rpy="0 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/convex_decomposition/gripper_jaw_00012.stl" />
+        <mesh filename="package://assets/convex_decomposition/gripper_jaw_00012.stl" />
       </geometry>
     </collision>
     <collision>
       <origin xyz="0 0 0.0204" rpy="0 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/convex_decomposition/gripper_jaw_00013.stl" />
+        <mesh filename="package://assets/convex_decomposition/gripper_jaw_00013.stl" />
       </geometry>
     </collision>
     <inertial>
@@ -700,7 +700,7 @@
     <visual>
       <origin xyz="-0.0306 0.0004 -0.0417" rpy="1.5708 1.5708 0" />
       <geometry>
-        <mesh filename="meshes/assets/sts3215.stl" />
+        <mesh filename="package://assets/sts3215.stl" />
       </geometry>
       <material name="sts3215_11_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -709,7 +709,7 @@
     <visual>
       <origin xyz="-0.0328847 -0.0000992 -0.01" rpy="3.14159 0 3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/arm_motor_holder.stl" />
+        <mesh filename="package://assets/arm_motor_holder.stl" />
       </geometry>
       <material name="arm_motor_holder_2_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -718,7 +718,7 @@
     <visual>
       <origin xyz="0 0 0.0181" rpy="3.14159 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/base_rotation.stl" />
+        <mesh filename="package://assets/base_rotation.stl" />
       </geometry>
       <material name="base_rotation_2_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -747,7 +747,7 @@
     <visual>
       <origin xyz="0.065085 -0.012 0.0197" rpy="-3.14159 0 -3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/upper_arm.stl" />
+        <mesh filename="package://assets/upper_arm.stl" />
       </geometry>
       <material name="upper_arm_2_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -756,7 +756,7 @@
     <visual>
       <origin xyz="0.162485 0.0155 0.0202" rpy="3.14159 0 1.5708" />
       <geometry>
-        <mesh filename="meshes/assets/sts3215.stl" />
+        <mesh filename="package://assets/sts3215.stl" />
       </geometry>
       <material name="sts3215_12_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -785,7 +785,7 @@
     <visual>
       <origin xyz="-0.1674 0.0052 0.0202" rpy="-3.14159 0 3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/sts3215.stl" />
+        <mesh filename="package://assets/sts3215.stl" />
       </geometry>
       <material name="sts3215_13_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -794,7 +794,7 @@
     <visual>
       <origin xyz="-0.1357 0.0029153 0.0196008" rpy="1.5708 0 -1.5708" />
       <geometry>
-        <mesh filename="meshes/assets/wrist_motor_holder.stl" />
+        <mesh filename="package://assets/wrist_motor_holder.stl" />
       </geometry>
       <material name="wrist_motor_holder_2_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -803,7 +803,7 @@
     <visual>
       <origin xyz="-0.0698937 -0.012 0.0195425" rpy="-1.5708 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/under_arm.stl" />
+        <mesh filename="package://assets/under_arm.stl" />
       </geometry>
       <material name="under_arm_2_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -832,7 +832,7 @@
     <visual>
       <origin xyz="0 0 0.02" rpy="-1.5708 0 3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/wrist_yaw_back.stl" />
+        <mesh filename="package://assets/wrist_yaw_back.stl" />
       </geometry>
       <material name="wrist_yaw_back_2_material">
         <color rgba="0.75686300 0.18039200 0.12156900 1.00000000"/>
@@ -861,7 +861,7 @@
     <visual>
       <origin xyz="-0.0125 0 -0.0187" rpy="0 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/sts3215.stl" />
+        <mesh filename="package://assets/sts3215.stl" />
       </geometry>
       <material name="sts3215_14_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -870,7 +870,7 @@
     <visual>
       <origin xyz="-0.0428 0 0.025043" rpy="0 -1.5708 0" />
       <geometry>
-        <mesh filename="meshes/assets/sts3215.stl" />
+        <mesh filename="package://assets/sts3215.stl" />
       </geometry>
       <material name="sts3215_15_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -879,7 +879,7 @@
     <visual>
       <origin xyz="-0.0283 0 0.0037965" rpy="3.14159 0 -3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/wrist_yaw_front.stl" />
+        <mesh filename="package://assets/wrist_yaw_front.stl" />
       </geometry>
       <material name="wrist_yaw_front_2_material">
         <color rgba="0.75686300 0.18039200 0.12156900 1.00000000"/>
@@ -908,7 +908,7 @@
     <visual>
       <origin xyz="0 0.0002182 0.0009497" rpy="-3.14159 0 3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/gripper_fixed.stl" />
+        <mesh filename="package://assets/gripper_fixed.stl" />
       </geometry>
       <material name="gripper_fixed_2_material">
         <color rgba="0.96470600 0.96470600 0.95294100 1.00000000"/>
@@ -917,7 +917,7 @@
     <visual>
       <origin xyz="0.015 -0.024 -0.0315502" rpy="-1.5708 0 1.5708" />
       <geometry>
-        <mesh filename="meshes/assets/wrist_camera_mount.stl" />
+        <mesh filename="package://assets/wrist_camera_mount.stl" />
       </geometry>
       <material name="wrist_camera_mount_2_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -926,7 +926,7 @@
     <visual>
       <origin xyz="-0.0077 -0.0001 -0.0234" rpy="-1.5708 0 3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/sts3215.stl" />
+        <mesh filename="package://assets/sts3215.stl" />
       </geometry>
       <material name="sts3215_16_material">
         <color rgba="0.23529400 0.23529400 0.23529400 1.00000000"/>
@@ -941,7 +941,7 @@
     <collision>
       <origin xyz="0 0.0002182 0.0009497" rpy="-3.14159 0 3.14159" />
       <geometry>
-        <mesh filename="meshes/assets/convex_decomposition/gripper_fixed_2_00002.stl" />
+        <mesh filename="package://assets/convex_decomposition/gripper_fixed_2_00002.stl" />
       </geometry>
     </collision>
     <collision>
@@ -997,7 +997,7 @@
     <visual>
       <origin xyz="0 0 0.0204" rpy="0 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/gripper_jaw.stl" />
+        <mesh filename="package://assets/gripper_jaw.stl" />
       </geometry>
       <material name="gripper_jaw_2_material">
         <color rgba="0.96470600 0.96470600 0.95294100 1.00000000"/>
@@ -1006,25 +1006,25 @@
     <collision>
       <origin xyz="0 0 0.0204" rpy="0 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/convex_decomposition/gripper_jaw_2_00006.stl" />
+        <mesh filename="package://assets/convex_decomposition/gripper_jaw_2_00006.stl" />
       </geometry>
     </collision>
     <collision>
       <origin xyz="0 0 0.0204" rpy="0 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/convex_decomposition/gripper_jaw_2_00009.stl" />
+        <mesh filename="package://assets/convex_decomposition/gripper_jaw_2_00009.stl" />
       </geometry>
     </collision>
     <collision>
       <origin xyz="0 0 0.0204" rpy="0 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/convex_decomposition/gripper_jaw_2_00012.stl" />
+        <mesh filename="package://assets/convex_decomposition/gripper_jaw_2_00012.stl" />
       </geometry>
     </collision>
     <collision>
       <origin xyz="0 0 0.0204" rpy="0 0 0" />
       <geometry>
-        <mesh filename="meshes/assets/convex_decomposition/gripper_jaw_2_00013.stl" />
+        <mesh filename="package://assets/convex_decomposition/gripper_jaw_2_00013.stl" />
       </geometry>
     </collision>
     <inertial>
